@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27D2213C-8058-4CE1-AEEB-0E0ECC522D2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MeleeAutomator</RootNamespace>
+    <AssemblyName>MeleeAutomator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DolphinControllerAutomator">
+      <HintPath>..\..\..\..\..\GitHub\DolphinControllerAutomator\DolphinControllerAutomator\bin\Release\DolphinControllerAutomator.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Characters\CouldNotMatchCharacterException.cs" />
+    <Compile Include="CouldNotFindDolphinWindowException.cs" />
+    <Compile Include="GameOptions.cs" />
+    <Compile Include="Helpers\MeleeCursor.cs" />
+    <Compile Include="Helpers\MenuCursor.cs" />
+    <Compile Include="VSMode\Melee\MeleeMenu.cs" />
+    <Compile Include="MeleeStates.cs" />
+    <Compile Include="Helpers\VerticalMenuCursor.cs" />
+    <Compile Include="TournamentCharacters.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TournamentCharacters.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\CharactersManager.cs" />
+    <Compile Include="Characters\CharactersImageMatcher.cs" />
+    <Compile Include="VSMode\Tournament\TournamentPlayer.cs" />
+    <Compile Include="WindowCapture.cs" />
+    <Compile Include="StartMenu.cs" />
+    <Compile Include="MeleeState.cs" />
+    <Compile Include="MenuSelector.cs" />
+    <Compile Include="Options\OptionsMenu.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VSMode\Tournament\TournamentMenu.cs" />
+    <Compile Include="VSMode\Tournament\TournamentPlayers.cs" />
+    <Compile Include="VSMode\VSMenu.cs" />
+    <Compile Include="DolphinWindowCapture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Characters\Yoshi.png" />
+    <None Include="Resources\Characters\Mario.png" />
+    <None Include="Resources\Characters\Bowser.png" />
+    <None Include="Resources\Characters\CaptainFalcon.png" />
+    <None Include="Resources\Characters\DK.png" />
+    <None Include="Resources\Characters\DrMario.png" />
+    <None Include="Resources\Characters\Falco.png" />
+    <None Include="Resources\Characters\Fox.png" />
+    <None Include="Resources\Characters\GameAndWatch.png" />
+    <None Include="Resources\Characters\Ganondorf.png" />
+    <None Include="Resources\Characters\IceClimbers.png" />
+    <None Include="Resources\Characters\Jigglypuff.png" />
+    <None Include="Resources\Characters\Kirby.png" />
+    <None Include="Resources\Characters\Link.png" />
+    <None Include="Resources\Characters\Luigi.png" />
+    <None Include="Resources\Characters\Marth.png" />
+    <None Include="Resources\Characters\Mewtwo.png" />
+    <None Include="Resources\Characters\Ness.png" />
+    <None Include="Resources\Characters\Peach.png" />
+    <None Include="Resources\Characters\Pichu.png" />
+    <None Include="Resources\Characters\Pikachu.png" />
+    <None Include="Resources\Characters\Roy.png" />
+    <None Include="Resources\Characters\Samus.png" />
+    <None Include="Resources\Characters\YoungLink.png" />
+    <None Include="Resources\Characters\Zelda.png" />
+    <Content Include="vJoyInterface.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="TournamentCharacters.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TournamentCharacters.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
