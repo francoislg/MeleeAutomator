@@ -12,6 +12,7 @@ using DolphinControllerAutomator;
 using DolphinControllerAutomator.Controllers;
 
 namespace MeleeAutomatorUITester {
+    using MeleeAutomator.Helpers;
     using MeleeAutomator.Characters;
     using MeleeAutomator.VSMode.Tournament;
 
@@ -20,6 +21,7 @@ namespace MeleeAutomatorUITester {
         DolphinController controller;
         MenuSelector menuSelector;
         MeleeStates states;
+        MeleeCursor cursor;
 
         public Tester() {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace MeleeAutomatorUITester {
             startMenu = new StartMenu(controller);
             states = startMenu.getMeleeStates();
             menuSelector = states.getMenuSelector();
+            cursor = new MeleeCursor(controller);
         }
 
         private void startMenuButton_click(object sender, EventArgs e) {
@@ -65,6 +68,14 @@ namespace MeleeAutomatorUITester {
 
         private void meleeModeButton_Click(object sender, EventArgs e) {
             menuSelector.meleeMode();
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            cursor.getTo(new Character("DrMario"));
+        }
+
+        private void quickButtonLeft_Click(object sender, EventArgs e) {
+            cursor.calibrate();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 namespace MeleeAutomator.Characters {
     using System.Drawing;
     using System.Drawing.Imaging;
+    using System.Xml;
 
     public class Character {
         private Bitmap tournamentBitmap;
@@ -26,6 +27,10 @@ namespace MeleeAutomator.Characters {
 
         public Bitmap getTournamentBitmap() {
             return tournamentBitmap;
+        }
+
+        public Point getMeleeSelectionScreenPosition() {
+            return new Point(1, 1);
         }
 
         public string getName() {

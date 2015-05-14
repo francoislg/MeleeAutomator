@@ -30,6 +30,8 @@
             this.screenshotTester = new System.Windows.Forms.Button();
             this.setTournamentPlayers = new System.Windows.Forms.Button();
             this.meleeModeButton = new System.Windows.Forms.Button();
+            this.MeleeCursorTesting = new System.Windows.Forms.Button();
+            this.quickButtonLeft = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // startMenuButton
@@ -74,7 +76,7 @@
             // 
             // screenshotTester
             // 
-            this.screenshotTester.Location = new System.Drawing.Point(13, 226);
+            this.screenshotTester.Location = new System.Drawing.Point(248, 302);
             this.screenshotTester.Name = "screenshotTester";
             this.screenshotTester.Size = new System.Drawing.Size(111, 23);
             this.screenshotTester.TabIndex = 0;
@@ -102,11 +104,33 @@
             this.meleeModeButton.UseVisualStyleBackColor = true;
             this.meleeModeButton.Click += new System.EventHandler(this.meleeModeButton_Click);
             // 
+            // MeleeCursorTesting
+            // 
+            this.MeleeCursorTesting.Location = new System.Drawing.Point(13, 237);
+            this.MeleeCursorTesting.Name = "MeleeCursorTesting";
+            this.MeleeCursorTesting.Size = new System.Drawing.Size(111, 23);
+            this.MeleeCursorTesting.TabIndex = 2;
+            this.MeleeCursorTesting.Text = "MeleeCursorTesting";
+            this.MeleeCursorTesting.UseVisualStyleBackColor = true;
+            this.MeleeCursorTesting.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // quickButtonLeft
+            // 
+            this.quickButtonLeft.Location = new System.Drawing.Point(130, 237);
+            this.quickButtonLeft.Name = "quickButtonLeft";
+            this.quickButtonLeft.Size = new System.Drawing.Size(111, 23);
+            this.quickButtonLeft.TabIndex = 2;
+            this.quickButtonLeft.Text = "CalibrateCursor";
+            this.quickButtonLeft.UseVisualStyleBackColor = true;
+            this.quickButtonLeft.Click += new System.EventHandler(this.quickButtonLeft_Click);
+            // 
             // Tester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 261);
+            this.ClientSize = new System.Drawing.Size(365, 337);
+            this.Controls.Add(this.quickButtonLeft);
+            this.Controls.Add(this.MeleeCursorTesting);
             this.Controls.Add(this.meleeModeButton);
             this.Controls.Add(this.setTournamentPlayers);
             this.Controls.Add(this.screenshotTester);
@@ -129,6 +153,8 @@
         private System.Windows.Forms.Button screenshotTester;
         private System.Windows.Forms.Button setTournamentPlayers;
         private System.Windows.Forms.Button meleeModeButton;
+        private System.Windows.Forms.Button MeleeCursorTesting;
+        private System.Windows.Forms.Button quickButtonLeft;
     }
 }
 
