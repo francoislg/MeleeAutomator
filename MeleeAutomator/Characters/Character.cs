@@ -9,11 +9,27 @@ namespace MeleeAutomator.Characters {
     using System.Xml;
 
     public class Character {
-        private Bitmap tournamentBitmap;
-        private String name;
+        public String name {
+            get;
+            private set;
+        }
+        public Bitmap tournamentBitmap {
+            get;
+            private set;
+        }
+        public Point tournamentPosition {
+            get;
+            private set;
+        }
+        public Point cssPosition {
+            get;
+            private set;
+        }
 
-        public Character(string name) {
+        public Character(string name, Point tournamentPosition, Point cssPosition) {
             this.name = name;
+            this.tournamentPosition = tournamentPosition;
+            this.cssPosition = cssPosition;
             this.tournamentBitmap = Load(name);
         }
 
@@ -23,18 +39,6 @@ namespace MeleeAutomator.Characters {
                 Bitmap targetBmp = newBmp.Clone(new Rectangle(0, 0, newBmp.Width, newBmp.Height), PixelFormat.Format32bppRgb);
                 return targetBmp;
             }
-        }
-
-        public Bitmap getTournamentBitmap() {
-            return tournamentBitmap;
-        }
-
-        public Point getMeleeSelectionScreenPosition() {
-            return new Point(1, 1);
-        }
-
-        public string getName() {
-            return name;
         }
     }
 }

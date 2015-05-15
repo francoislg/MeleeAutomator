@@ -2,41 +2,42 @@
 namespace MeleeAutomator.Helpers {
     using System;
     using DolphinControllerAutomator;
+    using System.Threading.Tasks;
 
     public class VerticalMenuCursor {
         protected int initialPosition;
         protected int currentPosition;
         protected int menuElements;
-        protected DolphinController controller;
+        protected DolphinAsyncController controller;
 
-        public VerticalMenuCursor(DolphinController controller, int menuElements, int initialPosition = 1) {
+        public VerticalMenuCursor(DolphinAsyncController controller, int menuElements, int initialPosition = 1) {
             this.controller = controller;
             this.menuElements = menuElements;
             this.currentPosition = initialPosition;
             this.initialPosition = initialPosition;
         }
 
-        public void moveDown() {
-            controller.press(DolphinPOVButton.DOWN);
+        public async Task moveDown() {
+            await controller.press(DolphinPOVButton.DOWN).execute();
             currentPosition = wrapY(currentPosition + 1);
         }
 
-        public void moveUp() {
-            controller.press(DolphinPOVButton.UP);
+        public async Task moveUp() {
+            await controller.press(DolphinPOVButton.UP).execute();
             currentPosition = wrapY(currentPosition - 1);
         }
 
-        public void moveTo(int position) {
+        public async Task moveTo(int position) {
             if (position == currentPosition) return;
             int distanceUp = wrapY(currentPosition - position);
             int distanceDown = wrapY(position - currentPosition);
             if (distanceDown < distanceUp) {
                 while (currentPosition != position) {
-                    moveDown();
+                    await moveDown();
                 }
             } else {
                 while (currentPosition != position) {
-                    moveUp();
+                    await moveUp();
                 }
             }
         }

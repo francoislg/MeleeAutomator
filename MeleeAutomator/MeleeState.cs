@@ -1,10 +1,11 @@
 ﻿
 namespace MeleeAutomator {
     using DolphinControllerAutomator;
+    using System.Threading.Tasks;
 
     public class MeleeState<State> {
         protected MeleeStates states;
-        protected DolphinController controller;
+        protected DolphinAsyncController controller;
         private State backState;
 
         public MeleeState(MeleeStates states, State backState) {
@@ -13,8 +14,8 @@ namespace MeleeAutomator {
             this.controller = states.getController();
         }
 
-        public State back() {
-            controller.press(DolphinButton.B);
+        public async Task<State> back() {
+            await controller.press(DolphinButton.B).execute();
             return backState;
         } 
     }

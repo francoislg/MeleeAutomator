@@ -8,6 +8,7 @@ namespace MeleeAutomator.VSMode {
     using MeleeAutomator.Helpers;
     using MeleeAutomator.VSMode.Tournament;
     using MeleeAutomator.VSMode.Melee;
+    using System.Threading.Tasks;
 
     public class VSMenu : MeleeState<MenuSelector> {
         private VerticalMenuCursor menuCursor;
@@ -16,15 +17,15 @@ namespace MeleeAutomator.VSMode {
             menuCursor = new VerticalMenuCursor(controller, 5);
         }
 
-        public MeleeMenu meleeMode() {
-            menuCursor.moveTo(1);
-            controller.press(DolphinButton.A);
+        public async Task<MeleeMenu> meleeMode() {
+            await menuCursor.moveTo(1);
+            await controller.press(DolphinButton.A).execute();
             return states.getMeleeMenu();
         }
 
-        public TournamentMenu tournamentMode() {
-            menuCursor.moveTo(2);
-            controller.press(DolphinButton.A);
+        public async Task<TournamentMenu> tournamentMode() {
+            await menuCursor.moveTo(2);
+            await controller.press(DolphinButton.A).execute();
             return states.getTournamentMenu();
         }
 

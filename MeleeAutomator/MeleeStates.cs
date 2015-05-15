@@ -13,13 +13,13 @@ namespace MeleeAutomator {
         private VSMenu vsMenu;
         private MeleeMenu meleeMenu;
         private TournamentMenu tournamentMenu;
-        private DolphinController controller;
+        private DolphinAsyncController controller;
         private OptionsMenu optionsMenu;
         private CharactersManager characters;
         private DolphinWindowCapture dolphinWindowCapture;
         private CharactersImageMatcher imageMatcher;
 
-        public MeleeStates(StartMenu startMenu, DolphinController controller) {
+        public MeleeStates(StartMenu startMenu, DolphinAsyncController controller) {
             this.startMenu = startMenu;
             this.controller = controller;
             this.menuSelector = new MenuSelector(this, startMenu);
@@ -32,7 +32,7 @@ namespace MeleeAutomator {
             this.imageMatcher = new CharactersImageMatcher(characters);
         }
 
-        public DolphinController getController() {
+        public DolphinAsyncController getController() {
             return controller;
         }
 

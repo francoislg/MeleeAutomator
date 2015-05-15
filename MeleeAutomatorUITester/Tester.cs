@@ -18,30 +18,32 @@ namespace MeleeAutomatorUITester {
 
     public partial class Tester : Form {
         StartMenu startMenu;
-        DolphinController controller;
+        DolphinAsyncController controller;
         MenuSelector menuSelector;
         MeleeStates states;
         MeleeCursor cursor;
+        CharactersManager manager;
 
         public Tester() {
             InitializeComponent();
-            controller = new vJoyController(1);
+            controller = new DolphinAsyncController(new vJoyController(1));
             startMenu = new StartMenu(controller);
             states = startMenu.getMeleeStates();
             menuSelector = states.getMenuSelector();
             cursor = new MeleeCursor(controller);
+            manager = new CharactersManager();
         }
 
-        private void startMenuButton_click(object sender, EventArgs e) {
-            startMenu.pressStart();
+        private async void startMenuButton_click(object sender, EventArgs e) {
+            await startMenu.pressStart();
         }
 
-        private void optionsMenuButton_Click(object sender, EventArgs e) {
-            menuSelector.options();
+        private async void optionsMenuButton_Click(object sender, EventArgs e) {
+            await menuSelector.options();
         }
 
-        private void tournamentModeButton_Click(object sender, EventArgs e) {
-            menuSelector.tournamentmode();
+        private async void tournamentModeButton_Click(object sender, EventArgs e) {
+            await menuSelector.tournamentmode();
         }
 
         private void setUpTournamentButton_Click(object sender, EventArgs e) {
@@ -58,24 +60,26 @@ namespace MeleeAutomatorUITester {
             using (Bitmap bitmap = windowHelper.captureCPUTournamentPortrait()) {
                 bitmap.Save("D:/test.png");
                 Character character = charactersImageMatcher.findCharacterInTournament(bitmap);
-                Console.WriteLine("Found " + character.getName());
+                Console.WriteLine("Found " + character.name);
             }
         }
 
-        private void setTournamentPlayers_Click(object sender, EventArgs e) {
-            new TournamentPlayers(states, states.getTournamentMenu(), 24).confirm();
+        private async void setTournamentPlayers_Click(object sender, EventArgs e) {
+            await new TournamentPlayers(states, states.getTournamentMenu(), 24).confirm();
         }
 
-        private void meleeModeButton_Click(object sender, EventArgs e) {
-            menuSelector.meleeMode();
+        private async void meleeModeButton_Click(object sender, EventArgs e) {
+            await menuSelector.meleeMode();
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            cursor.getTo(new Character("DrMario"));
+        private async void button1_Click(object sender, EventArgs e) {
+            await cursor.getTo(manager.getCharacter("Roy"));
+            await cursor.getTo(manager.getCharacter("DrMario"));
+            await cursor.getTo(manager.getCharacter("DK"));
         }
 
-        private void quickButtonLeft_Click(object sender, EventArgs e) {
-            cursor.calibrate();
+        private async void quickButtonLeft_Click(object sender, EventArgs e) {
+            await cursor.calibrate();
         }
     }
 }

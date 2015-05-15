@@ -6,6 +6,7 @@ using System.Text;
 namespace MeleeAutomator.VSMode.Tournament {
     using DolphinControllerAutomator;
     using MeleeAutomator.Characters;
+    using System.Threading.Tasks;
 
     public class TournamentPlayers : MeleeState<TournamentMenu> {
         private int numberOfPlayers;
@@ -19,12 +20,12 @@ namespace MeleeAutomator.VSMode.Tournament {
             }
         }
 
-        public void confirm() {
+        public async Task confirm() {
             for (int i = 0; i < players.Count(); i++) {
-                players[i].confirm(states, controller);
-                controller.press(DolphinPOVButton.DOWN);
+                await players[i].confirm(states, controller);
+                await controller.press(DolphinPOVButton.DOWN).execute();
             }
-            controller.press(DolphinButton.START).press(DolphinButton.A);
+            await controller.press(DolphinButton.START).then().press(DolphinButton.A).execute();
         }
     }
 }

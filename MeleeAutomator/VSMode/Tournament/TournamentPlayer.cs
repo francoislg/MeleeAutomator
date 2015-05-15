@@ -9,27 +9,26 @@ namespace MeleeAutomator.VSMode.Tournament {
     using DolphinControllerAutomator;
     using MeleeAutomator.Characters;
     using MeleeAutomator.Helpers;
+    using System.Threading.Tasks;
 
     public class TournamentPlayer {
-        private Character character;
+        private Character currentCharacter;
         private String name;
         
         public TournamentPlayer(Character character, string name) {
             this.name = name;
-            this.character = character;
+            this.currentCharacter = character;
         }
 
-        public void confirm(MeleeStates states, DolphinController controller){
+        public async Task confirm(MeleeStates states, DolphinAsyncController controller) {
             Bitmap portrait = states.getWindowCapture().captureCPUTournamentPortrait();
-            Character currentCharacter = states.getCharactersImageMatcher().findCharacterInTournament(portrait);
-            Point currentPosition = states.getCharacters().getTournamentPosition(currentCharacter);
-            Point destination = states.getCharacters().getTournamentPosition(character);
+            Character newCharacter = states.getCharactersImageMatcher().findCharacterInTournament(portrait);
             controller.press(DolphinButton.A);
-            MenuCursor menuCursor = new MenuCursor(controller, new Point(5, 5), currentPosition);
-            menuCursor.moveTo(destination);
-            controller.press(DolphinButton.A).press(DolphinPOVButton.RIGHT).press(DolphinButton.A);
+            MenuCursor menuCursor = new MenuCursor(controller, new Point(5, 5), currentCharacter.tournamentPosition);
+            await menuCursor.moveTo(newCharacter.tournamentPosition);
+            await controller.press(DolphinButton.A).then().press(DolphinPOVButton.RIGHT).then().press(DolphinButton.A).execute();
             // Ici le textMenuCursor !
-            controller.press(DolphinButton.B).press(DolphinPOVButton.LEFT);
+            await controller.press(DolphinButton.B).then().press(DolphinPOVButton.LEFT).execute();
         }
     }
 }

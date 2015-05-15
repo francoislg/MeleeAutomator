@@ -38,7 +38,7 @@ namespace MeleeAutomator.Characters {
             for (int x = 0; x < 5; x++) {
                 for (int y = 0; y < 5; y++) {
                     Character currentCharacter = allCharacters[x, y];
-                    using (Bitmap characterBitmap = resizeBitmap(currentCharacter.getTournamentBitmap(), compared.Size)) {
+                    using (Bitmap characterBitmap = resizeBitmap(currentCharacter.tournamentBitmap, compared.Size)) {
                         bool result = true;
                         for (int i = 0; i < characterBitmap.Size.Width - 1; i++) {
                             for (int j = 0; j < characterBitmap.Size.Height - 1; j++) {
