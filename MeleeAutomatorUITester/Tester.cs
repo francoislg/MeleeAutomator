@@ -73,13 +73,21 @@ namespace MeleeAutomatorUITester {
         }
 
         private async void button1_Click(object sender, EventArgs e) {
-            await cursor.getTo(manager.getCharacter("Roy"));
-            await cursor.getTo(manager.getCharacter("DrMario"));
-            await cursor.getTo(manager.getCharacter("DK"));
+            for (int i = 0; i < 60; i++) {
+                Character character = manager.getRandomCharacter();
+                Console.WriteLine(character);
+                await cursor.getTo(character);
+            }
+            await cursor.calibrate();
         }
 
         private async void quickButtonLeft_Click(object sender, EventArgs e) {
             await cursor.calibrate();
+        }
+
+        private async void button1_Click_1(object sender, EventArgs e) {
+            await cursor.changeControllerToCPU(1);
+            await cursor.CPUtoLevel9(1);
         }
     }
 }

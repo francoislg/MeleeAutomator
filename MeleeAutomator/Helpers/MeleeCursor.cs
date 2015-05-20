@@ -11,48 +11,96 @@ namespace MeleeAutomator.Helpers {
     using System.Threading.Tasks;
 
     public class MeleeCursor {
-        private readonly Rectangle BOUNDS = new Rectangle(0, 0, 1820, 1000);
-        private readonly PointF CURSORSPEEDPER100MS = new PointF(165f, 165f);
-        private readonly PointF RELATIVEPOSITION = new PointF(165f, 128f);
-        private readonly PointF OFFSET = new PointF(100, 70);
+        private readonly Rectangle BOUNDS = new Rectangle(0, 0, 1700, 900);
+        private readonly PointF CURSORSPEEDPER100MS = new PointF(210f, 150f);
+        private readonly PointF RELATIVEPOSITION = new PointF(200f, 130f);
+        private readonly PointF OFFSET = new PointF(100, 110);
+        private readonly float DIAGONALMULTIPLICATOR = 1.5f;
+        private readonly int NUMBEROFMOVEMENTSTORECALIBRATE = 10;
         private DolphinAsyncController controller;
         private PointF position;
+        private int countNumberOfMovements = 0;
+        private MeleePortrait[] portraits = new MeleePortrait[4];
 
         public MeleeCursor(DolphinAsyncController controller) : this(controller, 1) { }
 
         public MeleeCursor(DolphinAsyncController controller, int initialPlayer) {
             this.controller = controller;
-            setPosition(BOUNDS.Left, BOUNDS.Height);
-            // Player doesn't do anything yet.
+            setPosition(BOUNDS.Left, BOUNDS.Bottom);
+            for (int i = 0; i < 4; i++) {
+                portraits[i] = new MeleePortrait(this, controller, i + 1);
+            }
+            // TODO : Add initialPlayerPosition
+        }
+
+        public async Task changeControllerToCPU(int player) {
+            await portraits[player - 1].changeToCPU();
+            //await calibrate();
+        }
+
+        public async Task CPUtoLevel(int player, int level) {
+            await portraits[player - 1].changeToLevel(level);
+            //await calibrate();
         }
 
         public async Task getTo(Character character) {
-            PointF targetPosition = convertCharacterPosition(character.cssPosition);
-            if (position.X < targetPosition.X) {
-                int waitTime = msToTarget(position.X, targetPosition.X, CURSORSPEEDPER100MS.X);
-                controller.hold(DolphinJoystick.RIGHT).forMilliseconds(waitTime);
-                position.X = targetPosition.X;
-            } else if (position.X > targetPosition.X) {
-                int waitTime = msToTarget(position.X, targetPosition.X, CURSORSPEEDPER100MS.X);
-                controller.hold(DolphinJoystick.LEFT).forMilliseconds(waitTime);
-                position.X = targetPosition.X;
+            await getTo(convertCharacterPosition(character.cssPosition));
+            await controller.press(DolphinButton.B).then().press(DolphinButton.A).then().wait(100).execute();
+            countNumberOfMovements++;
+            if (countNumberOfMovements > NUMBEROFMOVEMENTSTORECALIBRATE) {
+                countNumberOfMovements = 0;
+                await calibrate();
             }
-            if (position.Y > targetPosition.Y) {
-                int waitTime = msToTarget(position.Y, targetPosition.Y, CURSORSPEEDPER100MS.Y);
-                controller.hold(DolphinJoystick.UP).forMilliseconds(waitTime);
-                position.Y = targetPosition.Y;
-            } else if (position.Y < targetPosition.Y) {
-                int waitTime = msToTarget(position.Y, targetPosition.Y, CURSORSPEEDPER100MS.Y);
-                controller.hold(DolphinJoystick.DOWN).forMilliseconds(waitTime);
-                position.Y = targetPosition.Y;
-            }
-            await controller.then().press(DolphinButton.B).then().press(DolphinButton.A).execute();
-            float dummy = targetPosition.X;
         }
 
-        private int msToTarget(float position, float target, float speed) {
+        public async Task getTo(PointF targetPosition) {
+            float waitTimeX = msToTarget(position.X, targetPosition.X, CURSORSPEEDPER100MS.X);
+            float waitTimeY = msToTarget(position.Y, targetPosition.Y, CURSORSPEEDPER100MS.Y);
+            float diagonalDelta = waitTimeX - waitTimeY;
+
+            if (diagonalDelta != 0) {
+                waitTimeX *= DIAGONALMULTIPLICATOR;
+                waitTimeY *= DIAGONALMULTIPLICATOR;
+            }
+            if (diagonalDelta > 0) {
+                waitTimeX -= Math.Abs(diagonalDelta * 0.5f);
+            } else if (diagonalDelta < 0) {
+                waitTimeY -= Math.Abs(diagonalDelta * 0.5f);
+            }
+
+            if (position.X < targetPosition.X) {
+                controller.hold(DolphinJoystick.RIGHT).forMilliseconds((int)waitTimeX);
+            } else if (position.X > targetPosition.X) {
+                controller.hold(DolphinJoystick.LEFT).forMilliseconds((int)waitTimeX);
+            }
+            if (position.Y > targetPosition.Y) {
+                controller.hold(DolphinJoystick.UP).forMilliseconds((int)waitTimeY);
+            } else if (position.Y < targetPosition.Y) {
+                controller.hold(DolphinJoystick.DOWN).forMilliseconds((int)waitTimeY);
+            }
+            await controller.execute();
+            position = targetPosition;
+            clamp();
+        }
+
+        private void clamp() {
+            if (position.X < BOUNDS.Left) {
+                position.X = BOUNDS.Left;
+            }
+            if (position.X > BOUNDS.Right) {
+                position.X = BOUNDS.Right;
+            }
+            if (position.Y < BOUNDS.Top) {
+                position.Y = BOUNDS.Top;
+            }
+            if (position.Y > BOUNDS.Bottom) {
+                position.Y = BOUNDS.Bottom;
+            }
+        }
+
+        private float msToTarget(float position, float target, float speed) {
             float distance = Math.Abs(position - target);
-            return (int)(distance / speed * 100);
+            return distance * 100 / speed;
         }
 
         private PointF convertCharacterPosition(Point position) {
@@ -63,8 +111,8 @@ namespace MeleeAutomator.Helpers {
             return new PointF(position.X + OFFSET.X, position.Y + OFFSET.Y);
         }
 
-        private PointF getRelativeCharacterPosition(Point position) {
-            return new PointF(position.X * RELATIVEPOSITION.X, position.Y * RELATIVEPOSITION.Y);
+        private PointF getRelativeCharacterPosition(Point charPosition) {
+            return new PointF(charPosition.X * RELATIVEPOSITION.X, charPosition.Y * RELATIVEPOSITION.Y);
         }
 
         private void setPosition(float x, float y) {
@@ -72,8 +120,22 @@ namespace MeleeAutomator.Helpers {
         }
 
         public async Task calibrate() {
-            setPosition(BOUNDS.Left, BOUNDS.Height);
-            await controller.hold(DolphinJoystick.DOWN).hold(DolphinJoystick.LEFT).forMilliseconds(1500).execute();
+            float x = BOUNDS.Left;
+            float y = BOUNDS.Bottom;
+            if (position.X < BOUNDS.Width / 2) {
+                controller.hold(DolphinJoystick.LEFT);
+            } else {
+                x = BOUNDS.Right;
+                controller.hold(DolphinJoystick.RIGHT);
+            }
+            if (position.Y > BOUNDS.Height / 2) {
+                controller.hold(DolphinJoystick.DOWN);
+            } else {
+                y = BOUNDS.Top;
+                controller.hold(DolphinJoystick.UP);
+            }
+            await controller.forMilliseconds(1500).execute();
+            setPosition(x, y);
         }
     }
 }

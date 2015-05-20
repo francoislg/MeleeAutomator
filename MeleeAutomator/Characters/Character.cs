@@ -40,5 +40,9 @@ namespace MeleeAutomator.Characters {
                 return targetBmp;
             }
         }
+
+        public override string ToString() {
+            return "Character : " + name;
+        }
     }
 }
