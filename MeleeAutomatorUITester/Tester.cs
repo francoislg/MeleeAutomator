@@ -87,7 +87,13 @@ namespace MeleeAutomatorUITester {
 
         private async void button1_Click_1(object sender, EventArgs e) {
             await cursor.changeControllerToCPU(1);
-            await cursor.CPUtoLevel9(1);
+            await cursor.CPUtoLevel(1, 9);
+            await cursor.CPUtoLevel(1, 1);
+            await cursor.CPUtoLevel(1, 5);
+            await cursor.CPUtoLevel(1, 3);
+            await cursor.CPUtoLevel(1, 7);
+            await cursor.CPUtoLevel(1, 8);
+            await cursor.CPUtoLevel(1, 2);
         }
     }
 }

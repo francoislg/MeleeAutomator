@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace MeleeAutomator.Helpers {
     using DolphinControllerAutomator;
     public class MeleePortrait {
-        private readonly int LEVELBARWIDTH = 280;
-        private readonly int LEVELBAROFFSET = 85;
+        private readonly int LEVELBARWIDTH = 320;
+        private readonly int LEVELBAROFFSET = 95;
         private MeleeCursor cursor;
         private DolphinAsyncController controller;
         private int player;
