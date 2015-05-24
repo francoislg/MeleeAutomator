@@ -6,6 +6,7 @@ using System.Text;
 namespace MeleeAutomator.VSMode {
     using DolphinControllerAutomator;
     using MeleeAutomator.Helpers;
+    using Options;
     using MeleeAutomator.VSMode.Tournament;
     using MeleeAutomator.VSMode.Melee;
     using System.Threading.Tasks;
@@ -21,6 +22,12 @@ namespace MeleeAutomator.VSMode {
             await menuCursor.moveTo(1);
             await controller.press(DolphinButton.A).execute();
             return states.getMeleeMenu();
+        }
+
+        public async Task<OptionsMenu> optionsMenu() {
+            await menuCursor.moveTo(4);
+            await controller.press(DolphinButton.A).execute();
+            return states.getOptionsMenu();
         }
 
         public async Task<TournamentMenu> tournamentMode() {
