@@ -36,7 +36,7 @@ namespace MeleeAutomator.VSMode {
             return states.tournamentMenu;
         }
 
-        internal void resetCursor(){
+        public override void reset() {
             menuCursor.resetCursor();
         }
     }

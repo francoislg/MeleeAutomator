@@ -10,16 +10,7 @@ namespace MeleeAutomator {
     public class MeleeStates {
         public MenuSelector menuSelector { get; private set; }
         public StartMenu startMenu { get; private set; }
-        private VSMenu vsMenuInternal;
-        public VSMenu vsMenu {
-            get {
-                vsMenuInternal.resetCursor();
-                return vsMenuInternal;
-            }
-            private set {
-                vsMenuInternal = value;
-            }
-        }
+        public VSMenu vsMenu { get; private set; }
         public MeleeMenu meleeMenu { get; private set; }
         public TournamentMenu tournamentMenu { get; private set; }
         public DolphinAsyncController mainController { get; private set; }

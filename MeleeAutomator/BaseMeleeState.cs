@@ -14,13 +14,11 @@ namespace MeleeAutomator {
             this.controller = states.mainController;
         }
 
-        public Task reset() {
-            return Task.FromResult(false);
-        }
+        public virtual void reset() {}
 
         public async Task<State> back() {
             await controller.press(DolphinButton.B).execute();
-            await backState.reset();
+            backState.reset();
             return backState;
         } 
     }

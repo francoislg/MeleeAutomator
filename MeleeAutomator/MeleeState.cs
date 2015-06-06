@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace MeleeAutomator {
     public interface MeleeState {
-        Task reset();
+        void reset();
     }
 }

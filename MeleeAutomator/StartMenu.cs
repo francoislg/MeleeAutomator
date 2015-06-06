@@ -16,9 +16,7 @@ namespace MeleeAutomator {
             this.controller = this.meleeStates.mainController;
         }
 
-        public Task reset() {
-            return Task.FromResult(false);
-        }
+        public void reset() {}
 
         public async Task<MenuSelector> pressStart(){
             await controller.hold(DolphinButton.A).forMilliseconds(1000).then().press(DolphinButton.START).execute();
