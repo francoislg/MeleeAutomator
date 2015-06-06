@@ -46,6 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Images\ImageHelper.cs" />
+    <Compile Include="MatchRessources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MatchRessources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="VSMode\Melee\MatchImageMatcher.cs" />
     <Compile Include="Characters\CouldNotMatchCharacterException.cs" />
     <Compile Include="CouldNotFindDolphinWindowException.cs" />
     <Compile Include="GameOptions.cs" />
@@ -54,6 +61,8 @@
     <Compile Include="Cursors\MeleeCursor.cs" />
     <Compile Include="MeleeState.cs" />
     <Compile Include="Stages\Stage.cs" />
+    <Compile Include="VSMode\Melee\ActiveDuelMatch.cs" />
+    <Compile Include="VSMode\Melee\MeleePlayer.cs" />
     <Compile Include="VSMode\Melee\MeleePortrait.cs" />
     <Compile Include="Cursors\MenuCursor.cs" />
     <Compile Include="VSMode\Melee\MeleeMenu.cs" />
@@ -105,9 +114,16 @@
     <None Include="Resources\Characters\Samus.png" />
     <None Include="Resources\Characters\YoungLink.png" />
     <None Include="Resources\Characters\Zelda.png" />
+    <Content Include="Resources\Match\EndOfMatch.png" />
+    <None Include="Resources\Match\Ribbon.png" />
+    <None Include="Resources\Match\Ribbon2.png" />
     <Content Include="vJoyInterface.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="MatchRessources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MatchRessources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="TournamentCharacters.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TournamentCharacters.Designer.cs</LastGenOutput>

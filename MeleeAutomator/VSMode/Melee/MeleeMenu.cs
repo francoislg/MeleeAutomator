@@ -12,7 +12,7 @@ namespace MeleeAutomator.VSMode.Melee {
     using System.Threading.Tasks;
 
     public class MeleeMenu : BaseMeleeState<VSMenu> {
-        private Character[] characters = new Character[2];
+        private MeleePlayer[] players = new MeleePlayer[2];
         private MeleePortrait[] portraits;
         private MeleeStageCursor stageCursor;
         private Stage stage = Stage.BattleField;
@@ -27,12 +27,12 @@ namespace MeleeAutomator.VSMode.Melee {
             stageCursor = new MeleeStageCursor(states.mainController);
         }
 
-        public MeleeMenu setCharacter(int player, Character character) {
-            if (player < 1 || player > numberOfPlayers) {
+        public MeleeMenu setPlayerOnPort(MeleePlayer player, int port) {
+            if (port < 1 || port > numberOfPlayers) {
                 throw new ArgumentOutOfRangeException("Player number must be between 1 and " + numberOfPlayers);
             }
-            int playerIndex = player - 1;
-            characters[playerIndex] = character;
+            int playerIndex = port - 1;
+            players[playerIndex] = player;
             return this;
         }
 
@@ -43,10 +43,9 @@ namespace MeleeAutomator.VSMode.Melee {
 
         public override void reset() {
             base.reset();
-
         }
 
-        public async Task confirm() {
+        public async Task<ActiveDuelMatch> confirm() {
             await Task.WhenAll(
                 confirmPlayer(0),
                 confirmPlayer(1)
@@ -54,6 +53,7 @@ namespace MeleeAutomator.VSMode.Melee {
             await states.mainController.press(DolphinButton.START).wait(1000).execute();
             await stageCursor.select(stage);
             await states.mainController.press(DolphinButton.A).execute();
+            return new ActiveDuelMatch(players[0], players[1], states.dolphinWindowCapturer);
         }
 
         private async Task confirmPlayer(int i) {
@@ -61,7 +61,7 @@ namespace MeleeAutomator.VSMode.Melee {
                 await portraits[i].forceCalibration();
                 await portraits[i].changeToCPU();
                 await portraits[i].changeToLevel(9);
-                await portraits[i].select(characters[i]);
+                await portraits[i].select(players[i].character);
             }
         }
     }

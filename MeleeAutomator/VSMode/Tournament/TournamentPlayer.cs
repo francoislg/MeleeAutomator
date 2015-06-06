@@ -21,7 +21,7 @@ namespace MeleeAutomator.VSMode.Tournament {
         }
 
         public async Task confirm(MeleeStates states, DolphinAsyncController controller) {
-            Bitmap portrait = states.dolphinWindowCapture.captureCPUTournamentPortrait();
+            Bitmap portrait = states.dolphinWindowCapturer.captureCPUTournamentPortrait();
             Character newCharacter = states.imageMatcher.findCharacterInTournament(portrait);
             controller.press(DolphinButton.A);
             MenuCursor menuCursor = new MenuCursor(controller, new Point(5, 5), currentCharacter.tournamentPosition);

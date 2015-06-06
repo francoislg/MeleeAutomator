@@ -17,12 +17,12 @@ namespace MeleeAutomator {
         public DolphinAsyncController[] controllers { get; private set; }
         public OptionsMenu optionsMenu { get; private set; }
         public CharactersManager characters { get; private set; }
-        public DolphinWindowCapture dolphinWindowCapture { get; private set; }
+        public DolphinWindowCapture dolphinWindowCapturer { get; private set; }
         public CharactersImageMatcher imageMatcher { get; private set; }
 
         public MeleeStates(StartMenu startMenu, DolphinAsyncController[] controllers) {
             this.characters = new CharactersManager();
-            this.dolphinWindowCapture = new DolphinWindowCapture();
+            this.dolphinWindowCapturer = new DolphinWindowCapture();
             this.imageMatcher = new CharactersImageMatcher(characters);
             this.startMenu = startMenu;
             this.controllers = controllers;

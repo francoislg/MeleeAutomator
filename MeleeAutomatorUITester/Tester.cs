@@ -18,6 +18,7 @@ namespace MeleeAutomatorUITester {
     using MeleeAutomator.VSMode.Tournament;
     using System.Threading.Tasks;
     using System.Diagnostics;
+    using MeleeAutomator.VSMode.Melee;
 
     public partial class Tester : Form {
         StartMenu startMenu;
@@ -64,13 +65,22 @@ namespace MeleeAutomatorUITester {
             CharactersImageMatcher charactersImageMatcher = new CharactersImageMatcher(states.characters);
             //windowHelper.focus();
             using (Bitmap bitmap = windowHelper.captureWindow()) {
-                bitmap.Save("D:/full.png");
+                bitmap.Save("D:/test/full.png");
             }
-            using (Bitmap bitmap = windowHelper.captureCPUTournamentPortrait()) {
+            MatchImageMatcher matcher = new MatchImageMatcher();
+            List<Bitmap> test = windowHelper.test(2);
+            int count = 0;
+            foreach (Bitmap bitmap in test) {
+                count++;
+                bitmap.Save("D:/test/" + count + ".png");
+                Console.WriteLine(count + " - found : " + matcher.playerWon(bitmap));
+            }
+   /*
+            using (Bitmap bitmap = windowHelper.captureWinningRibbon(2)) {
                 bitmap.Save("D:/test.png");
-                Character character = charactersImageMatcher.findCharacterInTournament(bitmap);
-                Console.WriteLine("Found " + character.name);
-            }
+                MatchImageMatcher matcher = new MatchImageMatcher();
+                Console.WriteLine("found : " + matcher.playerWon(bitmap));
+            }*/
         }
 
         private async void setTournamentPlayers_Click(object sender, EventArgs e) {
@@ -86,11 +96,12 @@ namespace MeleeAutomatorUITester {
         }
 
         private async void selectCharButton_Click(object sender, EventArgs e) {
-            await states.meleeMenu
-                .setCharacter(1, manager.getRandomCharacter())
-                .setCharacter(2, manager.getRandomCharacter())
+            ActiveDuelMatch duel = await states.meleeMenu
+                .setPlayerOnPort(new MeleePlayer(manager.getRandomCharacter(), "1"), 1)
+                .setPlayerOnPort(new MeleePlayer(manager.getRandomCharacter(), "2"), 2)
                 .setStage(Stage.DreamLand)
                 .confirm();
+            await duel.finish();
         }
     }
 }

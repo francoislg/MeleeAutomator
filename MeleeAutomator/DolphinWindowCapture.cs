@@ -18,6 +18,11 @@ namespace MeleeAutomator {
 
         private readonly Point DEFAULTSIZE = new Point(1920,1080);
         private readonly Rectangle CPUTournamentPortrait = new Rectangle(855, 261, 150, 64);
+        private readonly Rectangle[] PlayersWinningRibbons = new Rectangle[] {
+            new Rectangle(375, 858, 90, 5),
+            new Rectangle(810, 858, 90, 5)
+        };
+        private readonly Rectangle EndOfMatchWindow = new Rectangle(780, 515, 150, 64);
 
         private IntPtr mainWindowHandle;
         private WindowCapture capture;
@@ -44,8 +49,38 @@ namespace MeleeAutomator {
             return capture.CaptureWindow(mainWindowHandle);
         }
 
+        public Bitmap captureEndOfMatchWindow() {
+            return capture.CaptureRegion(mainWindowHandle, applyRatio(EndOfMatchWindow));
+        }
+
         public Bitmap captureCPUTournamentPortrait() {
             return capture.CaptureRegion(mainWindowHandle, applyRatio(CPUTournamentPortrait));
+        }
+
+        public Bitmap captureWinningRibbon(int player) {
+            if (player < 0 || player > 4) {
+                throw new ArgumentOutOfRangeException("This game only has 4 players");
+            }
+            if (player > PlayersWinningRibbons.Length) {
+                throw new NotSupportedException("This ribbon player is not yet supported");
+            }
+            return capture.CaptureRegion(mainWindowHandle, applyRatio(PlayersWinningRibbons[player - 1]));
+        }
+
+        public List<Bitmap> test(int player) {
+            if (player < 0 || player > 4) {
+                throw new ArgumentOutOfRangeException("This game only has 4 players");
+            }
+            if (player > PlayersWinningRibbons.Length) {
+                throw new NotSupportedException("This ribbon player is not yet supported");
+            }
+            List<Bitmap> t = new List<Bitmap>();
+            Rectangle rec = PlayersWinningRibbons[player - 1];
+            for (int i = -50; i < 50; i++) {
+                t.Add(capture.CaptureRegion(mainWindowHandle, applyRatio(rec)));
+                    rec.X = PlayersWinningRibbons[player - 1].X + i;
+            }
+            return t;
         }
 
         private Rectangle applyRatio(Rectangle rect) {
