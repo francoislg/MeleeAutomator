@@ -8,11 +8,10 @@ namespace MeleeAutomator.Cursors {
     using System.Drawing;
     using DolphinControllerAutomator.Controllers;
     using System.Threading.Tasks;
+    using Stages;
 
     public class MeleeStageCursor : MeleeCursor {
-        public enum Stage {
-            BattleField, FinalDestination, FountainOfDreams, YoshiStory, DreamLand, PokemonStadium
-        };
+
         private Dictionary<Stage, PointF> stagesPositions = new Dictionary<Stage, PointF>() {
             { Stage.BattleField, new PointF(950, 665) },
             { Stage.FinalDestination, new PointF(1100, 665) },

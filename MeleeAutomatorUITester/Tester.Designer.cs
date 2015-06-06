@@ -30,6 +30,7 @@
             this.screenshotTester = new System.Windows.Forms.Button();
             this.setTournamentPlayers = new System.Windows.Forms.Button();
             this.meleeModeButton = new System.Windows.Forms.Button();
+            this.selectCharButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // startMenuButton
@@ -102,11 +103,22 @@
             this.meleeModeButton.UseVisualStyleBackColor = true;
             this.meleeModeButton.Click += new System.EventHandler(this.meleeModeButton_Click);
             // 
+            // selectCharButton
+            // 
+            this.selectCharButton.Location = new System.Drawing.Point(127, 90);
+            this.selectCharButton.Name = "selectCharButton";
+            this.selectCharButton.Size = new System.Drawing.Size(75, 23);
+            this.selectCharButton.TabIndex = 1;
+            this.selectCharButton.Text = "Select Char";
+            this.selectCharButton.UseVisualStyleBackColor = true;
+            this.selectCharButton.Click += new System.EventHandler(this.selectCharButton_Click);
+            // 
             // Tester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 337);
+            this.Controls.Add(this.selectCharButton);
             this.Controls.Add(this.meleeModeButton);
             this.Controls.Add(this.setTournamentPlayers);
             this.Controls.Add(this.screenshotTester);
@@ -129,6 +141,7 @@
         private System.Windows.Forms.Button screenshotTester;
         private System.Windows.Forms.Button setTournamentPlayers;
         private System.Windows.Forms.Button meleeModeButton;
+        private System.Windows.Forms.Button selectCharButton;
     }
 }
 

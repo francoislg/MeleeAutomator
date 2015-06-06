@@ -53,6 +53,7 @@
     <Compile Include="Cursors\MeleeCharacterCursor.cs" />
     <Compile Include="Cursors\MeleeCursor.cs" />
     <Compile Include="MeleeState.cs" />
+    <Compile Include="Stages\Stage.cs" />
     <Compile Include="VSMode\Melee\MeleePortrait.cs" />
     <Compile Include="Cursors\MenuCursor.cs" />
     <Compile Include="VSMode\Melee\MeleeMenu.cs" />

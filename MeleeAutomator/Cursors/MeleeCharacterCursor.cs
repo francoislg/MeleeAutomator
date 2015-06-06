@@ -20,9 +20,8 @@ namespace MeleeAutomator.Cursors {
 
         public MeleeCharacterCursor(DolphinAsyncController controller, int initialPlayer) : base(controller, BOUNDS) {
             this.controller = controller;
-            setPosition(BOUNDS.Left, BOUNDS.Bottom);
             this.player = initialPlayer;
-            // TODO : Add initialPlayerPosition
+            reset();
         }
 
         public async Task changeController() {
@@ -73,6 +72,11 @@ namespace MeleeAutomator.Cursors {
             }
             await controller.forMilliseconds(1500).execute();
             setPosition(x, y);
+        }
+
+        public void reset() {
+            setPosition(BOUNDS.Left, BOUNDS.Bottom);
+            // TODO : Add initialPlayerPosition
         }
     }
 }

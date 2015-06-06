@@ -14,6 +14,7 @@ using DolphinControllerAutomator.Controllers;
 namespace MeleeAutomatorUITester {
     using MeleeAutomator.Cursors;
     using MeleeAutomator.Characters;
+    using MeleeAutomator.Stages;
     using MeleeAutomator.VSMode.Tournament;
     using System.Threading.Tasks;
     using System.Diagnostics;
@@ -81,7 +82,15 @@ namespace MeleeAutomatorUITester {
         }
 
         private async void toStageButton_Click_1(object sender, EventArgs e) {
-            await stageCursor.select(MeleeStageCursor.Stage.DreamLand);
+            await stageCursor.select(Stage.DreamLand);
+        }
+
+        private async void selectCharButton_Click(object sender, EventArgs e) {
+            await states.meleeMenu
+                .setCharacter(1, manager.getRandomCharacter())
+                .setCharacter(2, manager.getRandomCharacter())
+                .setStage(Stage.DreamLand)
+                .confirm();
         }
     }
 }

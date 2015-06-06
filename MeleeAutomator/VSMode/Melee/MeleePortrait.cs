@@ -40,6 +40,21 @@ namespace MeleeAutomator.VSMode.Melee {
             currentState = PortraitState.CPU;
         }
 
+        public async Task changeToHuman() {
+            switch (currentState) {
+                case PortraitState.CPU:
+                    await cursor.changeController();
+                    await cursor.changeController();
+                    break;
+                case PortraitState.NA:
+                    await cursor.changeController();
+                    break;
+                default:
+                    break;
+            }
+            currentState = PortraitState.CPU;
+        }
+
         public async Task changeToLevel(int level) {
             await changeToCPU();
             await changeCPULevel(level);
@@ -52,7 +67,7 @@ namespace MeleeAutomator.VSMode.Melee {
             }
         }
 
-        public async Task getTo(Character character) {
+        public async Task select(Character character) {
             await cursor.select(character);
             countNumberOfMovements++;
             if (countNumberOfMovements > NUMBEROFMOVEMENTSTORECALIBRATE) {
@@ -63,6 +78,10 @@ namespace MeleeAutomator.VSMode.Melee {
 
         public async Task forceCalibration() {
             await cursor.calibrate();
+        }
+
+        public void reset() {
+            cursor.reset();
         }
     }
 }
