@@ -52,7 +52,7 @@ namespace MeleeAutomator.Helpers {
         }
 
         public async Task getTo(Character character) {
-            await cursor.getTo(character);
+            await cursor.select(character);
             countNumberOfMovements++;
             if (countNumberOfMovements > NUMBEROFMOVEMENTSTORECALIBRATE) {
                 countNumberOfMovements = 0;

@@ -39,7 +39,7 @@ namespace MeleeAutomator.Helpers {
             await controller.press(DolphinButton.A).execute();
         }
 
-        public async Task getTo(Character character) {
+        public async Task select(Character character) {
             await getTo(convertCharacterPosition(character.cssPosition));
             await controller.press(DolphinButton.B).then().press(DolphinButton.A).then().wait(100).execute();
         }

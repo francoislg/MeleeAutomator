@@ -22,7 +22,7 @@ namespace MeleeAutomator.Helpers {
             this.bounds = bounds;
         }
 
-        public async Task getTo(PointF targetPosition) {
+        protected async Task getTo(PointF targetPosition) {
             float waitTimeX = msToTarget(position.X, targetPosition.X, CURSORSPEEDPER100MS.X);
             float waitTimeY = msToTarget(position.Y, targetPosition.Y, CURSORSPEEDPER100MS.Y);
             float diagonalDelta = waitTimeX - waitTimeY;
