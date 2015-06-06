@@ -5,14 +5,14 @@ using System.Text;
 
 namespace MeleeAutomator {
     using DolphinControllerAutomator;
-    using MeleeAutomator.Helpers;
+    using MeleeAutomator.Cursors;
     using MeleeAutomator.VSMode;
     using MeleeAutomator.VSMode.Tournament;
     using MeleeAutomator.VSMode.Melee;
     using MeleeAutomator.Options;
     using System.Threading.Tasks;
 
-    public class MenuSelector : MeleeState<StartMenu> {
+    public class MenuSelector : BaseMeleeState<StartMenu> {
         private VerticalMenuCursor menuCursor;
 
         public MenuSelector(MeleeStates states, StartMenu state) : base(states, state) {
@@ -22,13 +22,13 @@ namespace MeleeAutomator {
         public async Task<VSMenu> versus() {
             await menuCursor.moveTo(2);
             await controller.press(DolphinButton.A).execute();
-            return states.getVSMenu();
+            return states.vsMenu;
         }
 
         public async Task<OptionsMenu> options() {
             await menuCursor.moveTo(4);
             await controller.press(DolphinButton.A).execute();
-            return states.getOptionsMenu();
+            return states.optionsMenu;
         }
 
         public async Task<TournamentMenu> tournamentmode() {

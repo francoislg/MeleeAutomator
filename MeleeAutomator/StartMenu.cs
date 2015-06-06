@@ -7,22 +7,22 @@ using DolphinControllerAutomator;
 using System.Threading.Tasks;
 
 namespace MeleeAutomator {
-    public class StartMenu {
+    public class StartMenu : MeleeState {
         private DolphinAsyncController controller;
-        private MeleeStates meleeStates;
+        public MeleeStates meleeStates { get; private set; }
 
-        public StartMenu(DolphinAsyncController controller) {
-            this.controller = controller;
-            this.meleeStates = new MeleeStates(this, controller);
+        public StartMenu(DolphinAsyncController[] controllers) {
+            this.meleeStates = new MeleeStates(this, controllers);
+            this.controller = this.meleeStates.mainController;
+        }
+
+        public Task reset() {
+            return Task.FromResult(false);
         }
 
         public async Task<MenuSelector> pressStart(){
             await controller.hold(DolphinButton.A).forMilliseconds(1000).then().press(DolphinButton.START).execute();
-            return meleeStates.getMenuSelector();
-        }
-
-        public MeleeStates getMeleeStates() {
-            return meleeStates;
+            return meleeStates.menuSelector;
         }
     }
 }

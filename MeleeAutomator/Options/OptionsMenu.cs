@@ -6,7 +6,7 @@ using System.Text;
 using DolphinControllerAutomator;
 
 namespace MeleeAutomator.Options {
-    public class OptionsMenu : MeleeState<MenuSelector> {
+    public class OptionsMenu : BaseMeleeState<MenuSelector> {
         public enum MatchType {
             Time=0,
             Stock=1,

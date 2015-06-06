@@ -6,7 +6,7 @@ using System.Text;
 using DolphinControllerAutomator;
 
 namespace MeleeAutomator.VSMode.Tournament {
-    public class TournamentMenu : MeleeState<VSMenu> {
+    public class TournamentMenu : BaseMeleeState<VSMenu> {
         public enum Entrants {
             _02=0, 
             _04=1, 

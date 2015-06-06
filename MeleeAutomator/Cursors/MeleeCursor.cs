@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeleeAutomator.Helpers {
+namespace MeleeAutomator.Cursors {
     using DolphinControllerAutomator;
     using System.Drawing;
     using DolphinControllerAutomator.Controllers;

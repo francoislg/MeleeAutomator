@@ -30,11 +30,6 @@
             this.screenshotTester = new System.Windows.Forms.Button();
             this.setTournamentPlayers = new System.Windows.Forms.Button();
             this.meleeModeButton = new System.Windows.Forms.Button();
-            this.MeleeCursorTesting = new System.Windows.Forms.Button();
-            this.quickButtonLeft = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.toStageSSButton = new System.Windows.Forms.Button();
-            this.toStageButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // startMenuButton
@@ -107,66 +102,11 @@
             this.meleeModeButton.UseVisualStyleBackColor = true;
             this.meleeModeButton.Click += new System.EventHandler(this.meleeModeButton_Click);
             // 
-            // MeleeCursorTesting
-            // 
-            this.MeleeCursorTesting.Location = new System.Drawing.Point(13, 237);
-            this.MeleeCursorTesting.Name = "MeleeCursorTesting";
-            this.MeleeCursorTesting.Size = new System.Drawing.Size(111, 23);
-            this.MeleeCursorTesting.TabIndex = 2;
-            this.MeleeCursorTesting.Text = "MeleeCursorTesting";
-            this.MeleeCursorTesting.UseVisualStyleBackColor = true;
-            this.MeleeCursorTesting.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // quickButtonLeft
-            // 
-            this.quickButtonLeft.Location = new System.Drawing.Point(130, 237);
-            this.quickButtonLeft.Name = "quickButtonLeft";
-            this.quickButtonLeft.Size = new System.Drawing.Size(111, 23);
-            this.quickButtonLeft.TabIndex = 2;
-            this.quickButtonLeft.Text = "CalibrateCursor";
-            this.quickButtonLeft.UseVisualStyleBackColor = true;
-            this.quickButtonLeft.Click += new System.EventHandler(this.quickButtonLeft_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 266);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "CPUTesting";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // toStageSSButton
-            // 
-            this.toStageSSButton.Location = new System.Drawing.Point(127, 90);
-            this.toStageSSButton.Name = "toStageSSButton";
-            this.toStageSSButton.Size = new System.Drawing.Size(75, 23);
-            this.toStageSSButton.TabIndex = 2;
-            this.toStageSSButton.Text = "To StageSS";
-            this.toStageSSButton.UseVisualStyleBackColor = true;
-            this.toStageSSButton.Click += new System.EventHandler(this.toStageSSButton_Click);
-            // 
-            // toStageButton
-            // 
-            this.toStageButton.Location = new System.Drawing.Point(127, 119);
-            this.toStageButton.Name = "toStageButton";
-            this.toStageButton.Size = new System.Drawing.Size(75, 23);
-            this.toStageButton.TabIndex = 2;
-            this.toStageButton.Text = "Test Stage";
-            this.toStageButton.UseVisualStyleBackColor = true;
-            this.toStageButton.Click += new System.EventHandler(this.toStageButton_Click_1);
-            // 
             // Tester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 337);
-            this.Controls.Add(this.quickButtonLeft);
-            this.Controls.Add(this.toStageButton);
-            this.Controls.Add(this.toStageSSButton);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.MeleeCursorTesting);
             this.Controls.Add(this.meleeModeButton);
             this.Controls.Add(this.setTournamentPlayers);
             this.Controls.Add(this.screenshotTester);
@@ -189,11 +129,6 @@
         private System.Windows.Forms.Button screenshotTester;
         private System.Windows.Forms.Button setTournamentPlayers;
         private System.Windows.Forms.Button meleeModeButton;
-        private System.Windows.Forms.Button MeleeCursorTesting;
-        private System.Windows.Forms.Button quickButtonLeft;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button toStageSSButton;
-        private System.Windows.Forms.Button toStageButton;
     }
 }
 

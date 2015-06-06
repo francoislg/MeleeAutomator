@@ -5,13 +5,13 @@ using System.Text;
 
 namespace MeleeAutomator.VSMode {
     using DolphinControllerAutomator;
-    using MeleeAutomator.Helpers;
+    using MeleeAutomator.Cursors;
     using Options;
     using MeleeAutomator.VSMode.Tournament;
     using MeleeAutomator.VSMode.Melee;
     using System.Threading.Tasks;
 
-    public class VSMenu : MeleeState<MenuSelector> {
+    public class VSMenu : BaseMeleeState<MenuSelector> {
         private VerticalMenuCursor menuCursor;
 
         public VSMenu(MeleeStates states, MenuSelector state) : base(states, state) {
@@ -21,19 +21,19 @@ namespace MeleeAutomator.VSMode {
         public async Task<MeleeMenu> meleeMode() {
             await menuCursor.moveTo(1);
             await controller.press(DolphinButton.A).execute();
-            return states.getMeleeMenu();
+            return states.meleeMenu;
         }
 
         public async Task<OptionsMenu> optionsMenu() {
             await menuCursor.moveTo(4);
             await controller.press(DolphinButton.A).execute();
-            return states.getOptionsMenu();
+            return states.optionsMenu;
         }
 
         public async Task<TournamentMenu> tournamentMode() {
             await menuCursor.moveTo(2);
             await controller.press(DolphinButton.A).execute();
-            return states.getTournamentMenu();
+            return states.tournamentMenu;
         }
 
         internal void resetCursor(){

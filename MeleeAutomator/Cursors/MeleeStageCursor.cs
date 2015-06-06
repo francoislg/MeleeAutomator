@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeleeAutomator.Helpers {
+namespace MeleeAutomator.Cursors {
     using DolphinControllerAutomator;
     using System.Drawing;
     using DolphinControllerAutomator.Controllers;

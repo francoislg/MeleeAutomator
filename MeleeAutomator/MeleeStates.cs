@@ -8,65 +8,39 @@ namespace MeleeAutomator {
     using MeleeAutomator.VSMode.Melee;
 
     public class MeleeStates {
-        private MenuSelector menuSelector;
-        private StartMenu startMenu;
-        private VSMenu vsMenu;
-        private MeleeMenu meleeMenu;
-        private TournamentMenu tournamentMenu;
-        private DolphinAsyncController controller;
-        private OptionsMenu optionsMenu;
-        private CharactersManager characters;
-        private DolphinWindowCapture dolphinWindowCapture;
-        private CharactersImageMatcher imageMatcher;
+        public MenuSelector menuSelector { get; private set; }
+        public StartMenu startMenu { get; private set; }
+        private VSMenu vsMenuInternal;
+        public VSMenu vsMenu {
+            get {
+                vsMenuInternal.resetCursor();
+                return vsMenuInternal;
+            }
+            private set {
+                vsMenuInternal = value;
+            }
+        }
+        public MeleeMenu meleeMenu { get; private set; }
+        public TournamentMenu tournamentMenu { get; private set; }
+        public DolphinAsyncController mainController { get; private set; }
+        public DolphinAsyncController[] controllers { get; private set; }
+        public OptionsMenu optionsMenu { get; private set; }
+        public CharactersManager characters { get; private set; }
+        public DolphinWindowCapture dolphinWindowCapture { get; private set; }
+        public CharactersImageMatcher imageMatcher { get; private set; }
 
-        public MeleeStates(StartMenu startMenu, DolphinAsyncController controller) {
+        public MeleeStates(StartMenu startMenu, DolphinAsyncController[] controllers) {
+            this.characters = new CharactersManager();
+            this.dolphinWindowCapture = new DolphinWindowCapture();
+            this.imageMatcher = new CharactersImageMatcher(characters);
             this.startMenu = startMenu;
-            this.controller = controller;
+            this.controllers = controllers;
+            this.mainController = controllers[0];
             this.menuSelector = new MenuSelector(this, startMenu);
             this.optionsMenu = new OptionsMenu(this, menuSelector);
             this.vsMenu = new VSMenu(this, menuSelector);
             this.meleeMenu = new MeleeMenu(this, vsMenu);
             this.tournamentMenu = new TournamentMenu(this, vsMenu);
-            this.characters = new CharactersManager();
-            this.dolphinWindowCapture = new DolphinWindowCapture();
-            this.imageMatcher = new CharactersImageMatcher(characters);
-        }
-
-        public DolphinAsyncController getController() {
-            return controller;
-        }
-
-        public TournamentMenu getTournamentMenu(){
-            return tournamentMenu;
-        }
-
-        public OptionsMenu getOptionsMenu() {
-            return optionsMenu;
-        }
-
-        public VSMenu getVSMenu() {
-            vsMenu.resetCursor();
-            return vsMenu;
-        }
-
-        public MenuSelector getMenuSelector() {
-            return menuSelector;
-        }
-
-        public CharactersManager getCharacters() {
-            return characters;
-        }
-
-        public DolphinWindowCapture getWindowCapture() {
-            return dolphinWindowCapture;
-        }
-
-        public CharactersImageMatcher getCharactersImageMatcher() {
-            return imageMatcher;
-        }
-
-        internal MeleeMenu getMeleeMenu() {
-            return meleeMenu;
         }
     }
 }

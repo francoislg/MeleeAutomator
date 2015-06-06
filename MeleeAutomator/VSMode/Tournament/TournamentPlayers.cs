@@ -8,7 +8,7 @@ namespace MeleeAutomator.VSMode.Tournament {
     using MeleeAutomator.Characters;
     using System.Threading.Tasks;
 
-    public class TournamentPlayers : MeleeState<TournamentMenu> {
+    public class TournamentPlayers : BaseMeleeState<TournamentMenu> {
         private int numberOfPlayers;
         private TournamentPlayer[] players;
 
@@ -16,7 +16,7 @@ namespace MeleeAutomator.VSMode.Tournament {
             this.numberOfPlayers = numberOfPlayers;
             this.players = new TournamentPlayer[numberOfPlayers];
             for (int i = 0; i < players.Count(); i++) {
-                players[i] = new TournamentPlayer(states.getCharacters().getRandomCharacter(), "CPU" + i);
+                players[i] = new TournamentPlayer(states.characters.getRandomCharacter(), "CPU" + i);
             }
         }
 

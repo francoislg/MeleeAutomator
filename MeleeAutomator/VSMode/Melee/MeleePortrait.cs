@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeleeAutomator.Helpers {
+namespace MeleeAutomator.VSMode.Melee {
     using DolphinControllerAutomator;
     using Characters;
+    using Cursors;
     public class MeleePortrait {
         private readonly int NUMBEROFMOVEMENTSTORECALIBRATE = 10;
         private MeleeCharacterCursor cursor;

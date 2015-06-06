@@ -1,5 +1,5 @@
 ﻿
-namespace MeleeAutomator.Helpers {
+namespace MeleeAutomator.Cursors {
     using System;
     using DolphinControllerAutomator;
     using System.Threading.Tasks;

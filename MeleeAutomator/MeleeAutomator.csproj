@@ -49,14 +49,15 @@
     <Compile Include="Characters\CouldNotMatchCharacterException.cs" />
     <Compile Include="CouldNotFindDolphinWindowException.cs" />
     <Compile Include="GameOptions.cs" />
-    <Compile Include="Helpers\MeleeStageCursor.cs" />
-    <Compile Include="Helpers\MeleeCharacterCursor.cs" />
-    <Compile Include="Helpers\MeleeCursor.cs" />
-    <Compile Include="Helpers\MeleePortrait.cs" />
-    <Compile Include="Helpers\MenuCursor.cs" />
+    <Compile Include="Cursors\MeleeStageCursor.cs" />
+    <Compile Include="Cursors\MeleeCharacterCursor.cs" />
+    <Compile Include="Cursors\MeleeCursor.cs" />
+    <Compile Include="MeleeState.cs" />
+    <Compile Include="VSMode\Melee\MeleePortrait.cs" />
+    <Compile Include="Cursors\MenuCursor.cs" />
     <Compile Include="VSMode\Melee\MeleeMenu.cs" />
     <Compile Include="MeleeStates.cs" />
-    <Compile Include="Helpers\VerticalMenuCursor.cs" />
+    <Compile Include="Cursors\VerticalMenuCursor.cs" />
     <Compile Include="TournamentCharacters.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,7 +69,7 @@
     <Compile Include="VSMode\Tournament\TournamentPlayer.cs" />
     <Compile Include="WindowCapture.cs" />
     <Compile Include="StartMenu.cs" />
-    <Compile Include="MeleeState.cs" />
+    <Compile Include="BaseMeleeState.cs" />
     <Compile Include="MenuSelector.cs" />
     <Compile Include="Options\OptionsMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
