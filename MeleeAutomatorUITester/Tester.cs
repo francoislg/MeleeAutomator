@@ -38,8 +38,8 @@ namespace MeleeAutomatorUITester {
             states = startMenu.getMeleeStates();
             menuSelector = states.getMenuSelector();
             portraits = new MeleePortrait[] {
-                new MeleePortrait(controllers[0], 1),
-                new MeleePortrait(controllers[1], 2)
+                new MeleePortrait(new MeleeCharacterCursor(controllers[0], 1)),
+                new MeleePortrait(new MeleeCharacterCursor(controllers[1], 2))
             };
                 
             manager = new CharactersManager();
@@ -106,6 +106,28 @@ namespace MeleeAutomatorUITester {
             await portraits[1].changeToCPU();
             await portraits[0].changeToLevel(9);
             await portraits[1].changeToLevel(9);
+        }
+
+        private async void toStageButton_Click(object sender, EventArgs e) {
+            await Task.WhenAll(
+                portraits[0].forceCalibration(),
+                portraits[1].forceCalibration()
+            );
+            await Task.WhenAll(
+                portraits[0].changeToCPU(),
+                portraits[1].changeToCPU()
+            );
+            await Task.WhenAll(
+                portraits[0].changeToLevel(9),
+                portraits[1].changeToLevel(9)
+            );
+            Character character1 = manager.getRandomCharacter();
+            Character character2 = manager.getRandomCharacter();
+            await Task.WhenAll(
+                portraits[0].getTo(character1),
+                portraits[1].getTo(character2)
+            );
+            await mainController.press(DolphinButton.START).execute();
         }
     }
 }

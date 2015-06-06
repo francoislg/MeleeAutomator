@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MeleeAutomator.Helpers {
     using DolphinControllerAutomator;
@@ -10,18 +11,15 @@ namespace MeleeAutomator.Helpers {
     using System.Threading.Tasks;
 
     public class MeleeCursor {
-        private readonly Rectangle BOUNDS = new Rectangle(0, 0, 1700, 900);
         private readonly PointF CURSORSPEEDPER100MS = new PointF(210f, 150f);
         private readonly float DIAGONALMULTIPLICATOR = 1.5f;
-        private DolphinAsyncController controller;
-        private int player;
-        private PointF position;
+        protected DolphinAsyncController controller;
+        protected PointF position;
+        private readonly Rectangle bounds;
 
-        public MeleeCursor(DolphinAsyncController controller, int initialPlayer) {
+        public MeleeCursor(DolphinAsyncController controller, Rectangle bounds) {
             this.controller = controller;
-            setPosition(BOUNDS.Left, BOUNDS.Bottom);
-            this.player = initialPlayer;
-            // TODO : Add initialPlayerPosition
+            this.bounds = bounds;
         }
 
         public async Task getTo(PointF targetPosition) {
@@ -54,47 +52,29 @@ namespace MeleeAutomator.Helpers {
             clamp();
         }
 
+
         private void clamp() {
-            if (position.X < BOUNDS.Left) {
-                position.X = BOUNDS.Left;
+            if (position.X < bounds.Left) {
+                position.X = bounds.Left;
             }
-            if (position.X > BOUNDS.Right) {
-                position.X = BOUNDS.Right;
+            if (position.X > bounds.Right) {
+                position.X = bounds.Right;
             }
-            if (position.Y < BOUNDS.Top) {
-                position.Y = BOUNDS.Top;
+            if (position.Y < bounds.Top) {
+                position.Y = bounds.Top;
             }
-            if (position.Y > BOUNDS.Bottom) {
-                position.Y = BOUNDS.Bottom;
+            if (position.Y > bounds.Bottom) {
+                position.Y = bounds.Bottom;
             }
         }
 
-        private float msToTarget(float position, float target, float speed) {
+        protected float msToTarget(float position, float target, float speed) {
             float distance = Math.Abs(position - target);
             return distance * 100 / speed;
         }
 
-        private void setPosition(float x, float y) {
+        protected void setPosition(float x, float y) {
             position = new PointF(x, y);
-        }
-
-        public async Task calibrate() {
-            float x = BOUNDS.Left;
-            float y = BOUNDS.Bottom;
-            if (position.X < BOUNDS.Width / 2) {
-                controller.hold(DolphinJoystick.LEFT);
-            } else {
-                x = BOUNDS.Right;
-                controller.hold(DolphinJoystick.RIGHT);
-            }
-            if (position.Y > BOUNDS.Height / 2) {
-                controller.hold(DolphinJoystick.DOWN);
-            } else {
-                y = BOUNDS.Top;
-                controller.hold(DolphinJoystick.UP);
-            }
-            await controller.forMilliseconds(1500).execute();
-            setPosition(x, y);
         }
     }
 }

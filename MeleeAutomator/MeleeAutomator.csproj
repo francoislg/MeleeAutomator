@@ -49,6 +49,8 @@
     <Compile Include="Characters\CouldNotMatchCharacterException.cs" />
     <Compile Include="CouldNotFindDolphinWindowException.cs" />
     <Compile Include="GameOptions.cs" />
+    <Compile Include="Helpers\MeleeStageCursor.cs" />
+    <Compile Include="Helpers\MeleeCharacterCursor.cs" />
     <Compile Include="Helpers\MeleeCursor.cs" />
     <Compile Include="Helpers\MeleePortrait.cs" />
     <Compile Include="Helpers\MenuCursor.cs" />
