@@ -26,6 +26,7 @@ namespace MeleeAutomatorUITester {
         MeleeStates states;
         MeleePortrait[] portraits;
         CharactersManager manager;
+        MeleeStageCursor stageCursor;
 
         public Tester() {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace MeleeAutomatorUITester {
                 new MeleePortrait(new MeleeCharacterCursor(controllers[0], 1)),
                 new MeleePortrait(new MeleeCharacterCursor(controllers[1], 2))
             };
-                
+            stageCursor = new MeleeStageCursor(mainController);
             manager = new CharactersManager();
         }
 
@@ -108,7 +109,7 @@ namespace MeleeAutomatorUITester {
             await portraits[1].changeToLevel(9);
         }
 
-        private async void toStageButton_Click(object sender, EventArgs e) {
+        private async void toStageSSButton_Click(object sender, EventArgs e) {
             await Task.WhenAll(
                 portraits[0].forceCalibration(),
                 portraits[1].forceCalibration()
@@ -128,6 +129,10 @@ namespace MeleeAutomatorUITester {
                 portraits[1].getTo(character2)
             );
             await mainController.press(DolphinButton.START).execute();
+        }
+
+        private async void toStageButton_Click_1(object sender, EventArgs e) {
+            await stageCursor.select(MeleeStageCursor.Stage.DreamLand);
         }
     }
 }

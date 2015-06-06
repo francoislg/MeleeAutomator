@@ -33,6 +33,7 @@
             this.MeleeCursorTesting = new System.Windows.Forms.Button();
             this.quickButtonLeft = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.toStageSSButton = new System.Windows.Forms.Button();
             this.toStageButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -136,15 +137,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // toStageSSButton
+            // 
+            this.toStageSSButton.Location = new System.Drawing.Point(127, 90);
+            this.toStageSSButton.Name = "toStageSSButton";
+            this.toStageSSButton.Size = new System.Drawing.Size(75, 23);
+            this.toStageSSButton.TabIndex = 2;
+            this.toStageSSButton.Text = "To StageSS";
+            this.toStageSSButton.UseVisualStyleBackColor = true;
+            this.toStageSSButton.Click += new System.EventHandler(this.toStageSSButton_Click);
+            // 
             // toStageButton
             // 
-            this.toStageButton.Location = new System.Drawing.Point(127, 90);
+            this.toStageButton.Location = new System.Drawing.Point(127, 119);
             this.toStageButton.Name = "toStageButton";
             this.toStageButton.Size = new System.Drawing.Size(75, 23);
             this.toStageButton.TabIndex = 2;
-            this.toStageButton.Text = "To Stage";
+            this.toStageButton.Text = "Test Stage";
             this.toStageButton.UseVisualStyleBackColor = true;
-            this.toStageButton.Click += new System.EventHandler(this.toStageButton_Click);
+            this.toStageButton.Click += new System.EventHandler(this.toStageButton_Click_1);
             // 
             // Tester
             // 
@@ -153,6 +164,7 @@
             this.ClientSize = new System.Drawing.Size(365, 337);
             this.Controls.Add(this.quickButtonLeft);
             this.Controls.Add(this.toStageButton);
+            this.Controls.Add(this.toStageSSButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.MeleeCursorTesting);
             this.Controls.Add(this.meleeModeButton);
@@ -180,6 +192,7 @@
         private System.Windows.Forms.Button MeleeCursorTesting;
         private System.Windows.Forms.Button quickButtonLeft;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button toStageSSButton;
         private System.Windows.Forms.Button toStageButton;
     }
 }
