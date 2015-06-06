@@ -5,7 +5,6 @@ using System.Text;
 
 namespace MeleeAutomator.Helpers {
     using DolphinControllerAutomator;
-    using Characters;
     using System.Drawing;
     using DolphinControllerAutomator.Controllers;
     using System.Threading.Tasks;
@@ -13,44 +12,16 @@ namespace MeleeAutomator.Helpers {
     public class MeleeCursor {
         private readonly Rectangle BOUNDS = new Rectangle(0, 0, 1700, 900);
         private readonly PointF CURSORSPEEDPER100MS = new PointF(210f, 150f);
-        private readonly PointF RELATIVEPOSITION = new PointF(200f, 130f);
-        private readonly PointF OFFSET = new PointF(100, 110);
         private readonly float DIAGONALMULTIPLICATOR = 1.5f;
-        private readonly int NUMBEROFMOVEMENTSTORECALIBRATE = 10;
         private DolphinAsyncController controller;
+        private int player;
         private PointF position;
-        private int countNumberOfMovements = 0;
-        private MeleePortrait[] portraits = new MeleePortrait[4];
-
-        public MeleeCursor(DolphinAsyncController controller) : this(controller, 1) { }
 
         public MeleeCursor(DolphinAsyncController controller, int initialPlayer) {
             this.controller = controller;
             setPosition(BOUNDS.Left, BOUNDS.Bottom);
-            for (int i = 0; i < 4; i++) {
-                portraits[i] = new MeleePortrait(this, controller, i + 1);
-            }
+            this.player = initialPlayer;
             // TODO : Add initialPlayerPosition
-        }
-
-        public async Task changeControllerToCPU(int player) {
-            await portraits[player - 1].changeToCPU();
-            //await calibrate();
-        }
-
-        public async Task CPUtoLevel(int player, int level) {
-            await portraits[player - 1].changeToLevel(level);
-            //await calibrate();
-        }
-
-        public async Task getTo(Character character) {
-            await getTo(convertCharacterPosition(character.cssPosition));
-            await controller.press(DolphinButton.B).then().press(DolphinButton.A).then().wait(100).execute();
-            countNumberOfMovements++;
-            if (countNumberOfMovements > NUMBEROFMOVEMENTSTORECALIBRATE) {
-                countNumberOfMovements = 0;
-                await calibrate();
-            }
         }
 
         public async Task getTo(PointF targetPosition) {
@@ -101,18 +72,6 @@ namespace MeleeAutomator.Helpers {
         private float msToTarget(float position, float target, float speed) {
             float distance = Math.Abs(position - target);
             return distance * 100 / speed;
-        }
-
-        private PointF convertCharacterPosition(Point position) {
-            return addOffset(getRelativeCharacterPosition(position));
-        }
-
-        private PointF addOffset(PointF position) {
-            return new PointF(position.X + OFFSET.X, position.Y + OFFSET.Y);
-        }
-
-        private PointF getRelativeCharacterPosition(Point charPosition) {
-            return new PointF(charPosition.X * RELATIVEPOSITION.X, charPosition.Y * RELATIVEPOSITION.Y);
         }
 
         private void setPosition(float x, float y) {

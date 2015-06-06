@@ -15,22 +15,33 @@ namespace MeleeAutomatorUITester {
     using MeleeAutomator.Helpers;
     using MeleeAutomator.Characters;
     using MeleeAutomator.VSMode.Tournament;
+    using System.Threading.Tasks;
+    using System.Diagnostics;
 
     public partial class Tester : Form {
         StartMenu startMenu;
-        DolphinAsyncController controller;
+        DolphinAsyncController mainController;
+        DolphinAsyncController[] controllers;
         MenuSelector menuSelector;
         MeleeStates states;
-        MeleeCursor cursor;
+        MeleePortrait[] portraits;
         CharactersManager manager;
 
         public Tester() {
             InitializeComponent();
-            controller = new DolphinAsyncController(new vJoyController(1));
-            startMenu = new StartMenu(controller);
+            controllers = new DolphinAsyncController[] {
+                new DolphinAsyncController(new vJoyController(1)),
+                new DolphinAsyncController(new vJoyController(2))
+            };
+            mainController = controllers[0];
+            startMenu = new StartMenu(mainController);
             states = startMenu.getMeleeStates();
             menuSelector = states.getMenuSelector();
-            cursor = new MeleeCursor(controller);
+            portraits = new MeleePortrait[] {
+                new MeleePortrait(controllers[0], 1),
+                new MeleePortrait(controllers[1], 2)
+            };
+                
             manager = new CharactersManager();
         }
 
@@ -76,24 +87,25 @@ namespace MeleeAutomatorUITester {
             for (int i = 0; i < 60; i++) {
                 Character character = manager.getRandomCharacter();
                 Console.WriteLine(character);
-                await cursor.getTo(character);
+                await Task.WhenAll(
+                    portraits[0].getTo(character),
+                    portraits[1].getTo(character)
+                );
             }
-            await cursor.calibrate();
         }
 
         private async void quickButtonLeft_Click(object sender, EventArgs e) {
-            await cursor.calibrate();
+            await Task.WhenAll(
+                portraits[0].forceCalibration(),
+                portraits[1].forceCalibration()
+            );
         }
 
         private async void button1_Click_1(object sender, EventArgs e) {
-            await cursor.changeControllerToCPU(1);
-            await cursor.CPUtoLevel(1, 9);
-            await cursor.CPUtoLevel(1, 1);
-            await cursor.CPUtoLevel(1, 5);
-            await cursor.CPUtoLevel(1, 3);
-            await cursor.CPUtoLevel(1, 7);
-            await cursor.CPUtoLevel(1, 8);
-            await cursor.CPUtoLevel(1, 2);
+            await portraits[0].changeToCPU();
+            await portraits[1].changeToCPU();
+            await portraits[0].changeToLevel(9);
+            await portraits[1].changeToLevel(9);
         }
     }
 }
