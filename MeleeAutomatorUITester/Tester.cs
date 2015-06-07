@@ -28,13 +28,15 @@ namespace MeleeAutomatorUITester {
         MeleeStates states;
         CharactersManager manager;
         MeleeStageCursor stageCursor;
+        DolphinWindowCapture dolphinCapturer;
 
         public Tester() {
             InitializeComponent();
             controllers = new DolphinAsyncController[] {
                 new DolphinAsyncController(new vJoyController(1)),
                 new DolphinAsyncController(new vJoyController(2))
-            };
+            }; 
+            dolphinCapturer = new DolphinWindowCapture();
             mainController = controllers[0];
             startMenu = new StartMenu(controllers);
             states = startMenu.meleeStates;
@@ -61,26 +63,16 @@ namespace MeleeAutomatorUITester {
         }
 
         private void screenshotTester_Click(object sender, EventArgs e) {
-            DolphinWindowCapture windowHelper = new DolphinWindowCapture();
             CharactersImageMatcher charactersImageMatcher = new CharactersImageMatcher(states.characters);
             //windowHelper.focus();
-            using (Bitmap bitmap = windowHelper.captureWindow()) {
+            using (Bitmap bitmap = dolphinCapturer.captureWindow()) {
                 bitmap.Save("D:/test/full.png");
             }
             MatchImageMatcher matcher = new MatchImageMatcher();
-            List<Bitmap> test = windowHelper.test(2);
-            int count = 0;
-            foreach (Bitmap bitmap in test) {
-                count++;
-                bitmap.Save("D:/test/" + count + ".png");
-                Console.WriteLine(count + " - found : " + matcher.playerWon(bitmap));
-            }
-   /*
-            using (Bitmap bitmap = windowHelper.captureWinningRibbon(2)) {
+            using (Bitmap bitmap = dolphinCapturer.captureWinningRibbon(2)) {
                 bitmap.Save("D:/test.png");
-                MatchImageMatcher matcher = new MatchImageMatcher();
                 Console.WriteLine("found : " + matcher.playerWon(bitmap));
-            }*/
+            }
         }
 
         private async void setTournamentPlayers_Click(object sender, EventArgs e) {
@@ -96,12 +88,27 @@ namespace MeleeAutomatorUITester {
         }
 
         private async void selectCharButton_Click(object sender, EventArgs e) {
-            ActiveDuelMatch duel = await states.meleeMenu
+            FinishedDuelMatch duel = await states.meleeMenu
                 .setPlayerOnPort(new MeleePlayer(manager.getRandomCharacter(), "1"), 1)
                 .setPlayerOnPort(new MeleePlayer(manager.getRandomCharacter(), "2"), 2)
                 .setStage(Stage.DreamLand)
                 .confirm();
-            await duel.finish();
+            Console.WriteLine("Winner is : " + duel.winner);
+        }
+
+        private void updatePictureBoxTimer_Tick(object sender, EventArgs e) {
+            currentlySeen.Image = dolphinCapturer.captureWindow();
+            seenGame.Image = dolphinCapturer.captureEndOfMatchWindow();
+            seenRibbon1.Image = dolphinCapturer.captureWinningRibbon(1);
+            seenRibbon2.Image = dolphinCapturer.captureWinningRibbon(2);
+        }
+
+        private void autoUpdateToggle_CheckedChanged(object sender, EventArgs e) {
+            if (updatePictureBoxTimer.Enabled) {
+                updatePictureBoxTimer.Stop();
+            } else {
+                updatePictureBoxTimer.Start();
+            }
         }
     }
 }

@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.startMenuButton = new System.Windows.Forms.Button();
             this.optionsMenuButton = new System.Windows.Forms.Button();
             this.tournamentModeButton = new System.Windows.Forms.Button();
@@ -31,6 +32,16 @@
             this.setTournamentPlayers = new System.Windows.Forms.Button();
             this.meleeModeButton = new System.Windows.Forms.Button();
             this.selectCharButton = new System.Windows.Forms.Button();
+            this.currentlySeen = new System.Windows.Forms.PictureBox();
+            this.updatePictureBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.autoUpdateToggle = new System.Windows.Forms.CheckBox();
+            this.seenGame = new System.Windows.Forms.PictureBox();
+            this.seenRibbon1 = new System.Windows.Forms.PictureBox();
+            this.seenRibbon2 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.currentlySeen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seenGame)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seenRibbon1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seenRibbon2)).BeginInit();
             this.SuspendLayout();
             // 
             // startMenuButton
@@ -75,7 +86,7 @@
             // 
             // screenshotTester
             // 
-            this.screenshotTester.Location = new System.Drawing.Point(248, 302);
+            this.screenshotTester.Location = new System.Drawing.Point(256, 290);
             this.screenshotTester.Name = "screenshotTester";
             this.screenshotTester.Size = new System.Drawing.Size(111, 23);
             this.screenshotTester.TabIndex = 0;
@@ -113,11 +124,72 @@
             this.selectCharButton.UseVisualStyleBackColor = true;
             this.selectCharButton.Click += new System.EventHandler(this.selectCharButton_Click);
             // 
+            // currentlySeen
+            // 
+            this.currentlySeen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.currentlySeen.Location = new System.Drawing.Point(373, 13);
+            this.currentlySeen.Name = "currentlySeen";
+            this.currentlySeen.Size = new System.Drawing.Size(300, 300);
+            this.currentlySeen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.currentlySeen.TabIndex = 2;
+            this.currentlySeen.TabStop = false;
+            // 
+            // updatePictureBoxTimer
+            // 
+            this.updatePictureBoxTimer.Interval = 1000;
+            this.updatePictureBoxTimer.Tick += new System.EventHandler(this.updatePictureBoxTimer_Tick);
+            // 
+            // autoUpdateToggle
+            // 
+            this.autoUpdateToggle.AutoSize = true;
+            this.autoUpdateToggle.Location = new System.Drawing.Point(247, 267);
+            this.autoUpdateToggle.Name = "autoUpdateToggle";
+            this.autoUpdateToggle.Size = new System.Drawing.Size(120, 17);
+            this.autoUpdateToggle.TabIndex = 3;
+            this.autoUpdateToggle.Text = "Toggle Auto update";
+            this.autoUpdateToggle.UseVisualStyleBackColor = true;
+            this.autoUpdateToggle.CheckedChanged += new System.EventHandler(this.autoUpdateToggle_CheckedChanged);
+            // 
+            // seenGame
+            // 
+            this.seenGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.seenGame.Location = new System.Drawing.Point(678, 12);
+            this.seenGame.Name = "seenGame";
+            this.seenGame.Size = new System.Drawing.Size(150, 64);
+            this.seenGame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.seenGame.TabIndex = 4;
+            this.seenGame.TabStop = false;
+            // 
+            // seenRibbon1
+            // 
+            this.seenRibbon1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.seenRibbon1.Location = new System.Drawing.Point(708, 82);
+            this.seenRibbon1.Name = "seenRibbon1";
+            this.seenRibbon1.Size = new System.Drawing.Size(90, 5);
+            this.seenRibbon1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.seenRibbon1.TabIndex = 5;
+            this.seenRibbon1.TabStop = false;
+            // 
+            // seenRibbon2
+            // 
+            this.seenRibbon2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.seenRibbon2.Location = new System.Drawing.Point(708, 93);
+            this.seenRibbon2.Name = "seenRibbon2";
+            this.seenRibbon2.Size = new System.Drawing.Size(90, 5);
+            this.seenRibbon2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.seenRibbon2.TabIndex = 6;
+            this.seenRibbon2.TabStop = false;
+            // 
             // Tester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 337);
+            this.ClientSize = new System.Drawing.Size(840, 322);
+            this.Controls.Add(this.seenRibbon2);
+            this.Controls.Add(this.seenRibbon1);
+            this.Controls.Add(this.seenGame);
+            this.Controls.Add(this.autoUpdateToggle);
+            this.Controls.Add(this.currentlySeen);
             this.Controls.Add(this.selectCharButton);
             this.Controls.Add(this.meleeModeButton);
             this.Controls.Add(this.setTournamentPlayers);
@@ -128,7 +200,12 @@
             this.Controls.Add(this.startMenuButton);
             this.Name = "Tester";
             this.Text = "MeleeAutomatorUITester";
+            ((System.ComponentModel.ISupportInitialize)(this.currentlySeen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seenGame)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seenRibbon1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seenRibbon2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -142,6 +219,12 @@
         private System.Windows.Forms.Button setTournamentPlayers;
         private System.Windows.Forms.Button meleeModeButton;
         private System.Windows.Forms.Button selectCharButton;
+        private System.Windows.Forms.PictureBox currentlySeen;
+        private System.Windows.Forms.Timer updatePictureBoxTimer;
+        private System.Windows.Forms.CheckBox autoUpdateToggle;
+        private System.Windows.Forms.PictureBox seenGame;
+        private System.Windows.Forms.PictureBox seenRibbon1;
+        private System.Windows.Forms.PictureBox seenRibbon2;
     }
 }
 
