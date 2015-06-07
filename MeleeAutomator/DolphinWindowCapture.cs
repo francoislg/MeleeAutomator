@@ -26,8 +26,6 @@ namespace MeleeAutomator {
 
         private IntPtr mainWindowHandle;
         private WindowCapture capture;
-        private float ratioX;
-        private float ratioY;
 
         public DolphinWindowCapture() {
             Process[] p = Process.GetProcessesByName("Dolphin");
@@ -36,9 +34,6 @@ namespace MeleeAutomator {
             }
             mainWindowHandle = p[0].MainWindowHandle;
             capture = new WindowCapture();
-            Bitmap reference = capture.CaptureWindow(mainWindowHandle);
-            ratioX = (float)reference.Width / (float)DEFAULTSIZE.X;
-            ratioY = (float)reference.Height / (float)DEFAULTSIZE.Y;
         }
 
         public void focus(){
@@ -67,24 +62,12 @@ namespace MeleeAutomator {
             return capture.CaptureRegion(mainWindowHandle, applyRatio(PlayersWinningRibbons[player - 1]));
         }
 
-        public List<Bitmap> test(int player) {
-            if (player < 0 || player > 4) {
-                throw new ArgumentOutOfRangeException("This game only has 4 players");
-            }
-            if (player > PlayersWinningRibbons.Length) {
-                throw new NotSupportedException("This ribbon player is not yet supported");
-            }
-            List<Bitmap> t = new List<Bitmap>();
-            Rectangle rec = PlayersWinningRibbons[player - 1];
-            for (int i = -50; i < 50; i++) {
-                t.Add(capture.CaptureRegion(mainWindowHandle, applyRatio(rec)));
-                    rec.X = PlayersWinningRibbons[player - 1].X + i;
-            }
-            return t;
+        private Rectangle applyRatio(Rectangle rect) {
+            return new Rectangle((int)(rect.Left * 1), (int)(rect.Top * 1), (int)(rect.Width * 1), (int)(rect.Height * 1));
         }
 
-        private Rectangle applyRatio(Rectangle rect) {
-            return new Rectangle((int)(rect.Left * ratioX), (int)(rect.Top * ratioY), (int)(rect.Width * ratioX), (int)(rect.Height * ratioY));
+        private void recalibrate() {
+
         }
     }
 }
