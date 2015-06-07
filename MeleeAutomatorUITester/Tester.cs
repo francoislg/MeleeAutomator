@@ -44,6 +44,7 @@ namespace MeleeAutomatorUITester {
             
             stageCursor = new MeleeStageCursor(mainController);
             manager = new CharactersManager();
+            autoUpdateToggle.Checked = true;
         }
 
         private async void startMenuButton_click(object sender, EventArgs e) {

@@ -55,7 +55,9 @@ namespace MeleeAutomator.VSMode.Melee {
             await states.mainController.press(DolphinButton.A).execute();
             ActiveDuelMatch match = new ActiveDuelMatch(players[0], players[1], states.dolphinWindowCapturer);
             FinishedDuelMatch finishedMatch = await match.finish();
-            await mainController.press(DolphinButton.A).execute();
+            await mainController.wait(3000).then().press(DolphinButton.A).then().wait(3000).then().press(DolphinButton.START).execute();
+            Array.ForEach(portraits, portrait => portrait.reset());
+            stageCursor.reset();
             return finishedMatch;
         }
 

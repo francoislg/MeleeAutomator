@@ -21,15 +21,26 @@ namespace MeleeAutomator.Cursors {
             { Stage.PokemonStadium, new PointF(1350, 400) }
         };
         private static readonly Rectangle BOUNDS = new Rectangle(0, 0, 1700, 900);
+        private Random rand;
 
         public MeleeStageCursor(DolphinAsyncController controller)
             : base(controller, BOUNDS) {
             this.controller = controller;
-            setPosition(925, 740);
+            reset();
+            rand = new Random();
+        }
+
+        public async Task selectRandom() {
+            Stage randomStage = stagesPositions.ElementAt(rand.Next(0, stagesPositions.Count)).Key;
+            await select(randomStage);
         }
 
         public async Task select(Stage stage) {
             await getTo(stagesPositions[stage]);
+        }
+
+        public void reset() {
+            setPosition(925, 740);
         }
     }
 }
