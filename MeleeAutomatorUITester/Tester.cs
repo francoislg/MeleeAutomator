@@ -32,6 +32,7 @@ namespace MeleeAutomatorUITester {
         CharactersManager manager;
         MeleeStageCursor stageCursor;
         DolphinWindowCapture dolphinCapturer;
+        MatchImageMatcher matchImageMatcher = new MatchImageMatcher();
 
         public Tester() {
             InitializeComponent();
@@ -72,10 +73,9 @@ namespace MeleeAutomatorUITester {
             using (Bitmap bitmap = dolphinCapturer.captureWindow()) {
                 bitmap.Save("D:/test/full.png");
             }
-            MatchImageMatcher matcher = new MatchImageMatcher();
             using (Bitmap bitmap = dolphinCapturer.captureWinningRibbon(2)) {
                 bitmap.Save("D:/test.png");
-                Console.WriteLine("found : " + matcher.playerWon(bitmap));
+                Console.WriteLine("found : " + matchImageMatcher.playerWon(bitmap));
             }
         }
 
@@ -103,8 +103,17 @@ namespace MeleeAutomatorUITester {
         private void updatePictureBoxTimer_Tick(object sender, EventArgs e) {
             currentlySeen.Image = dolphinCapturer.captureWindow();
             seenGame.Image = dolphinCapturer.captureEndOfMatchWindow();
-            seenRibbon1.Image = dolphinCapturer.captureWinningRibbon(1);
-            seenRibbon2.Image = dolphinCapturer.captureWinningRibbon(2);
+            Bitmap ribbon1 = dolphinCapturer.captureWinningRibbon(1);
+            Bitmap ribbon2 = dolphinCapturer.captureWinningRibbon(2);
+            seenRibbon1.Image = ribbon1;
+            seenRibbon2.Image = ribbon2;
+            if (matchImageMatcher.playerWon(ribbon1)) {
+                matchLabel.Text = "PLAYER 1 MATCH";
+            } else if (matchImageMatcher.playerWon(ribbon2)) {
+                matchLabel.Text = "PLAYER 2 MATCH";
+            } else {
+                matchLabel.Text = "No";
+            }
         }
 
         private void autoUpdateToggle_CheckedChanged(object sender, EventArgs e) {
@@ -113,6 +122,11 @@ namespace MeleeAutomatorUITester {
             } else {
                 updatePictureBoxTimer.Start();
             }
+        }
+
+        private void saveSnapshotButton_Click(object sender, EventArgs e) {
+            seenRibbon1.Image.Save("D:/test/Ribbon.png");
+            seenRibbon2.Image.Save("D:/test/Ribbon2.png");
         }
     }
 }

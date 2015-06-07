@@ -19,8 +19,8 @@ namespace MeleeAutomator.Images {
         private readonly Point DEFAULTSIZE = new Point(1920,1080);
         private readonly Rectangle CPUTournamentPortrait = new Rectangle(855, 261, 150, 64);
         private readonly Rectangle[] PlayersWinningRibbons = new Rectangle[] {
-            new Rectangle(375, 858, 90, 5),
-            new Rectangle(810, 858, 90, 5)
+            new Rectangle(385, 856, 50, 3),
+            new Rectangle(820, 856, 50, 3)
         };
         private readonly Rectangle EndOfMatchWindow = new Rectangle(780, 515, 150, 64);
 

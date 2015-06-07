@@ -37,6 +37,11 @@ namespace MeleeAutomator.Menus.VSMode.Melee {
             return this;
         }
 
+        public MeleeMenu setRandomStage() {
+            this.stage = stageCursor.getRandomStage();
+            return this;
+        }
+
         public MeleeMenu setStage(Stage stage) {
             this.stage = stage;
             return this;

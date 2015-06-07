@@ -38,6 +38,8 @@
             this.seenGame = new System.Windows.Forms.PictureBox();
             this.seenRibbon1 = new System.Windows.Forms.PictureBox();
             this.seenRibbon2 = new System.Windows.Forms.PictureBox();
+            this.matchLabel = new System.Windows.Forms.Label();
+            this.saveSnapshotButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.currentlySeen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seenGame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seenRibbon1)).BeginInit();
@@ -163,9 +165,9 @@
             // seenRibbon1
             // 
             this.seenRibbon1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.seenRibbon1.Location = new System.Drawing.Point(708, 82);
+            this.seenRibbon1.Location = new System.Drawing.Point(695, 82);
             this.seenRibbon1.Name = "seenRibbon1";
-            this.seenRibbon1.Size = new System.Drawing.Size(90, 5);
+            this.seenRibbon1.Size = new System.Drawing.Size(50, 3);
             this.seenRibbon1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.seenRibbon1.TabIndex = 5;
             this.seenRibbon1.TabStop = false;
@@ -173,18 +175,38 @@
             // seenRibbon2
             // 
             this.seenRibbon2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.seenRibbon2.Location = new System.Drawing.Point(708, 93);
+            this.seenRibbon2.Location = new System.Drawing.Point(760, 82);
             this.seenRibbon2.Name = "seenRibbon2";
-            this.seenRibbon2.Size = new System.Drawing.Size(90, 5);
+            this.seenRibbon2.Size = new System.Drawing.Size(50, 3);
             this.seenRibbon2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.seenRibbon2.TabIndex = 6;
             this.seenRibbon2.TabStop = false;
+            // 
+            // matchLabel
+            // 
+            this.matchLabel.AutoSize = true;
+            this.matchLabel.Location = new System.Drawing.Point(679, 95);
+            this.matchLabel.Name = "matchLabel";
+            this.matchLabel.Size = new System.Drawing.Size(62, 13);
+            this.matchLabel.TabIndex = 7;
+            this.matchLabel.Text = "Match label";
+            // 
+            // saveSnapshotButton
+            // 
+            this.saveSnapshotButton.Location = new System.Drawing.Point(139, 290);
+            this.saveSnapshotButton.Name = "saveSnapshotButton";
+            this.saveSnapshotButton.Size = new System.Drawing.Size(111, 23);
+            this.saveSnapshotButton.TabIndex = 0;
+            this.saveSnapshotButton.Text = "Save snapshots";
+            this.saveSnapshotButton.UseVisualStyleBackColor = true;
+            this.saveSnapshotButton.Click += new System.EventHandler(this.saveSnapshotButton_Click);
             // 
             // Tester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 322);
+            this.Controls.Add(this.matchLabel);
             this.Controls.Add(this.seenRibbon2);
             this.Controls.Add(this.seenRibbon1);
             this.Controls.Add(this.seenGame);
@@ -193,6 +215,7 @@
             this.Controls.Add(this.selectCharButton);
             this.Controls.Add(this.meleeModeButton);
             this.Controls.Add(this.setTournamentPlayers);
+            this.Controls.Add(this.saveSnapshotButton);
             this.Controls.Add(this.screenshotTester);
             this.Controls.Add(this.setUpTournamentButton);
             this.Controls.Add(this.tournamentModeButton);
@@ -225,6 +248,8 @@
         private System.Windows.Forms.PictureBox seenGame;
         private System.Windows.Forms.PictureBox seenRibbon1;
         private System.Windows.Forms.PictureBox seenRibbon2;
+        private System.Windows.Forms.Label matchLabel;
+        private System.Windows.Forms.Button saveSnapshotButton;
     }
 }
 

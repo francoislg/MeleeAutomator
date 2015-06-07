@@ -30,9 +30,8 @@ namespace MeleeAutomator.Cursors {
             rand = new Random();
         }
 
-        public async Task selectRandom() {
-            Stage randomStage = stagesPositions.ElementAt(rand.Next(0, stagesPositions.Count)).Key;
-            await select(randomStage);
+        public Stage getRandomStage() {
+            return stagesPositions.ElementAt(rand.Next(0, stagesPositions.Count)).Key;
         }
 
         public async Task select(Stage stage) {
