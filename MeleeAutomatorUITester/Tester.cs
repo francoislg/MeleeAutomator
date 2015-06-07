@@ -12,6 +12,7 @@ using DolphinControllerAutomator;
 using DolphinControllerAutomator.Controllers;
 
 namespace MeleeAutomatorUITester {
+    using MeleeAutomator.Images;
     using MeleeAutomator.Menus;
     using MeleeAutomator.StateEngine;
     using MeleeAutomator.Cursors;

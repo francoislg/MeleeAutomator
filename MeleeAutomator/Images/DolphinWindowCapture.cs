@@ -1,5 +1,5 @@
 ﻿
-namespace MeleeAutomator {
+namespace MeleeAutomator.Images {
     using System;
     using System.Runtime.InteropServices;
     using System.Collections.Generic;
