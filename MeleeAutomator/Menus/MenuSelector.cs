@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeleeAutomator {
+namespace MeleeAutomator.Menus {
+    using StateEngine;
     using DolphinControllerAutomator;
     using MeleeAutomator.Cursors;
-    using MeleeAutomator.VSMode;
-    using MeleeAutomator.VSMode.Tournament;
-    using MeleeAutomator.VSMode.Melee;
+    using MeleeAutomator.Menus.VSMode;
+    using MeleeAutomator.Menus.VSMode.Tournament;
+    using MeleeAutomator.Menus.VSMode.Melee;
     using MeleeAutomator.Options;
     using System.Threading.Tasks;
 
-    public class MenuSelector : BaseMeleeState<StartMenu> {
+    public class MenuSelector : BaseMeleeState<MeleeBoot> {
         private VerticalMenuCursor menuCursor;
 
-        public MenuSelector(MeleeStates states, StartMenu state) : base(states, state) {
+        public MenuSelector(MeleeStates states, MeleeBoot state) : base(states, state) {
             this.menuCursor = new VerticalMenuCursor(mainController, 5);
         }
 

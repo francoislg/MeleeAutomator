@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeleeAutomator.VSMode.Melee {
+namespace MeleeAutomator.Menus.VSMode.Melee {
     using Characters;
     public class MeleePlayer {
         public Character character { get; private set; }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeleeAutomator.VSMode.Melee {
+namespace MeleeAutomator.Menus.VSMode.Melee {
     using DolphinControllerAutomator;
     using Characters;
     using Cursors;

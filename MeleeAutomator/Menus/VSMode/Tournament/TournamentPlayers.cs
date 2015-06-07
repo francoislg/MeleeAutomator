@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeleeAutomator.VSMode.Tournament {
+namespace MeleeAutomator.Menus.VSMode.Tournament {
+    using StateEngine;
     using DolphinControllerAutomator;
     using MeleeAutomator.Characters;
     using System.Threading.Tasks;

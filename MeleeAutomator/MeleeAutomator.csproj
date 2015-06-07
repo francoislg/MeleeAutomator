@@ -52,22 +52,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MatchRessources.resx</DependentUpon>
     </Compile>
-    <Compile Include="VSMode\Melee\FinishedDuelMatch.cs" />
-    <Compile Include="VSMode\Melee\MatchImageMatcher.cs" />
+    <Compile Include="Menus\VSMode\Melee\FinishedDuelMatch.cs" />
+    <Compile Include="Menus\VSMode\Melee\MatchImageMatcher.cs" />
     <Compile Include="Characters\CouldNotMatchCharacterException.cs" />
     <Compile Include="CouldNotFindDolphinWindowException.cs" />
     <Compile Include="GameOptions.cs" />
     <Compile Include="Cursors\MeleeStageCursor.cs" />
     <Compile Include="Cursors\MeleeCharacterCursor.cs" />
     <Compile Include="Cursors\MeleeCursor.cs" />
-    <Compile Include="MeleeState.cs" />
+    <Compile Include="obj\StateEngine\MeleeState.cs" />
     <Compile Include="Stages\Stage.cs" />
-    <Compile Include="VSMode\Melee\ActiveDuelMatch.cs" />
-    <Compile Include="VSMode\Melee\MeleePlayer.cs" />
-    <Compile Include="VSMode\Melee\MeleePortrait.cs" />
+    <Compile Include="Menus\VSMode\Melee\ActiveDuelMatch.cs" />
+    <Compile Include="Menus\VSMode\Melee\MeleePlayer.cs" />
+    <Compile Include="Menus\VSMode\Melee\MeleePortrait.cs" />
     <Compile Include="Cursors\MenuCursor.cs" />
-    <Compile Include="VSMode\Melee\MeleeMenu.cs" />
-    <Compile Include="MeleeStates.cs" />
+    <Compile Include="Menus\VSMode\Melee\MeleeMenu.cs" />
+    <Compile Include="obj\StateEngine\MeleeStates.cs" />
     <Compile Include="Cursors\VerticalMenuCursor.cs" />
     <Compile Include="TournamentCharacters.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -77,17 +77,17 @@
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\CharactersManager.cs" />
     <Compile Include="Characters\CharactersImageMatcher.cs" />
-    <Compile Include="VSMode\Tournament\TournamentPlayer.cs" />
-    <Compile Include="WindowCapture.cs" />
-    <Compile Include="StartMenu.cs" />
-    <Compile Include="BaseMeleeState.cs" />
-    <Compile Include="MenuSelector.cs" />
-    <Compile Include="Options\OptionsMenu.cs" />
+    <Compile Include="Menus\VSMode\Tournament\TournamentPlayer.cs" />
+    <Compile Include="Images\WindowCapture.cs" />
+    <Compile Include="MeleeBoot.cs" />
+    <Compile Include="obj\StateEngine\BaseMeleeState.cs" />
+    <Compile Include="Menus\MenuSelector.cs" />
+    <Compile Include="Menus\Options\OptionsMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VSMode\Tournament\TournamentMenu.cs" />
-    <Compile Include="VSMode\Tournament\TournamentPlayers.cs" />
-    <Compile Include="VSMode\VSMenu.cs" />
-    <Compile Include="DolphinWindowCapture.cs" />
+    <Compile Include="Menus\VSMode\Tournament\TournamentMenu.cs" />
+    <Compile Include="Menus\VSMode\Tournament\TournamentPlayers.cs" />
+    <Compile Include="Menus\VSMode\VSMenu.cs" />
+    <Compile Include="Images\DolphinWindowCapture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Characters\Yoshi.png" />
@@ -131,6 +131,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

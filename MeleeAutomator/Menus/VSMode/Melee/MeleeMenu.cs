@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeleeAutomator.VSMode.Melee {
+namespace MeleeAutomator.Menus.VSMode.Melee {
+    using StateEngine;
     using DolphinControllerAutomator;
     using MeleeAutomator.Cursors;
     using MeleeAutomator.Characters;
     using MeleeAutomator.Stages;
-    using MeleeAutomator.VSMode;
+    using MeleeAutomator.Menus.VSMode;
     using System.Threading.Tasks;
 
     public class MeleeMenu : BaseMeleeState<VSMenu> {

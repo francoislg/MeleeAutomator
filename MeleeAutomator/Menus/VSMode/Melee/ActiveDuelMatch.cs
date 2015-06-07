@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeleeAutomator.VSMode.Melee {
+namespace MeleeAutomator.Menus.VSMode.Melee {
     public class ActiveDuelMatch {
         public MeleePlayer player1 { get; private set; }
         public MeleePlayer player2 { get; private set; }

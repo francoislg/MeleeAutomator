@@ -12,16 +12,18 @@ using DolphinControllerAutomator;
 using DolphinControllerAutomator.Controllers;
 
 namespace MeleeAutomatorUITester {
+    using MeleeAutomator.Menus;
+    using MeleeAutomator.StateEngine;
     using MeleeAutomator.Cursors;
     using MeleeAutomator.Characters;
     using MeleeAutomator.Stages;
-    using MeleeAutomator.VSMode.Tournament;
+    using MeleeAutomator.Menus.VSMode.Tournament;
     using System.Threading.Tasks;
     using System.Diagnostics;
-    using MeleeAutomator.VSMode.Melee;
+    using MeleeAutomator.Menus.VSMode.Melee;
 
     public partial class Tester : Form {
-        StartMenu startMenu;
+        MeleeBoot startMenu;
         DolphinAsyncController mainController;
         DolphinAsyncController[] controllers;
         MenuSelector menuSelector;
@@ -38,7 +40,7 @@ namespace MeleeAutomatorUITester {
             }; 
             dolphinCapturer = new DolphinWindowCapture();
             mainController = controllers[0];
-            startMenu = new StartMenu(controllers);
+            startMenu = new MeleeBoot(controllers);
             states = startMenu.meleeStates;
             menuSelector = states.menuSelector;
             
