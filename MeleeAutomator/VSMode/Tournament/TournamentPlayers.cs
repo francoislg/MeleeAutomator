@@ -22,10 +22,10 @@ namespace MeleeAutomator.VSMode.Tournament {
 
         public async Task confirm() {
             for (int i = 0; i < players.Count(); i++) {
-                await players[i].confirm(states, controller);
-                await controller.press(DolphinPOVButton.DOWN).execute();
+                await players[i].confirm(states, mainController);
+                await mainController.press(DolphinPOVButton.DOWN).execute();
             }
-            await controller.press(DolphinButton.START).then().press(DolphinButton.A).execute();
+            await mainController.press(DolphinButton.START).then().press(DolphinButton.A).execute();
         }
     }
 }

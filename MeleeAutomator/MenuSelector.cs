@@ -16,18 +16,18 @@ namespace MeleeAutomator {
         private VerticalMenuCursor menuCursor;
 
         public MenuSelector(MeleeStates states, StartMenu state) : base(states, state) {
-            this.menuCursor = new VerticalMenuCursor(controller, 5);
+            this.menuCursor = new VerticalMenuCursor(mainController, 5);
         }
 
         public async Task<VSMenu> versus() {
             await menuCursor.moveTo(2);
-            await controller.press(DolphinButton.A).execute();
+            await mainController.press(DolphinButton.A).execute();
             return states.vsMenu;
         }
 
         public async Task<OptionsMenu> options() {
             await menuCursor.moveTo(4);
-            await controller.press(DolphinButton.A).execute();
+            await mainController.press(DolphinButton.A).execute();
             return states.optionsMenu;
         }
 

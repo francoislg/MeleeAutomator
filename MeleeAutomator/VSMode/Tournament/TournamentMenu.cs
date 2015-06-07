@@ -65,12 +65,12 @@ namespace MeleeAutomator.VSMode.Tournament {
         }
 
         public TournamentPlayers confirm() {
-            controller.press(DolphinButton.A).press(DolphinButton.A);
+            mainController.press(DolphinButton.A).press(DolphinButton.A);
             confirmNumberOfEntrants();
-            controller.press(DolphinPOVButton.RIGHT).press(DolphinButton.A);
+            mainController.press(DolphinPOVButton.RIGHT).press(DolphinButton.A);
             confirmStageSelection();
             confirmCPULevel();
-            controller.press(DolphinButton.A);
+            mainController.press(DolphinButton.A);
             return new TournamentPlayers(states, this, entrantsEnumToNumber(entrants));
         }
 
@@ -78,43 +78,43 @@ namespace MeleeAutomator.VSMode.Tournament {
             int currentEntrantsCursor = 0;
             if (entrants > 0) {
                 while (currentEntrantsCursor < (int)entrants) {
-                    controller.press(DolphinPOVButton.RIGHT);
+                    mainController.press(DolphinPOVButton.RIGHT);
                     currentEntrantsCursor++;
                 }
             } else if (entrants < 0) {
                 while (currentEntrantsCursor > (int)entrants) {
-                    controller.press(DolphinPOVButton.LEFT);
+                    mainController.press(DolphinPOVButton.LEFT);
                     currentEntrantsCursor--;
                 }
             }
-            controller.press(DolphinButton.A);
+            mainController.press(DolphinButton.A);
         }
 
         private void confirmStageSelection() {
             switch (stageSelection) {
                 case StageSelection.AlwaysDifferent:
-                    controller.press(DolphinPOVButton.RIGHT);
+                    mainController.press(DolphinPOVButton.RIGHT);
                     break;
                 case StageSelection.SingleRandom:
                     break;
             }
-            controller.press(DolphinButton.A);
+            mainController.press(DolphinButton.A);
         }
 
         private void confirmCPULevel() {
             int currentCPULevel = 0;
             if (cpuLevel > 0) {
                 while (currentCPULevel < (int)cpuLevel) {
-                    controller.press(DolphinPOVButton.RIGHT);
+                    mainController.press(DolphinPOVButton.RIGHT);
                     currentCPULevel++;
                 }
             } else if (cpuLevel < 0) {
                 while (currentCPULevel > (int)cpuLevel) {
-                    controller.press(DolphinPOVButton.LEFT);
+                    mainController.press(DolphinPOVButton.LEFT);
                     currentCPULevel--;
                 }
             }
-            controller.press(DolphinButton.A);
+            mainController.press(DolphinButton.A);
         }
 
         private int entrantsEnumToNumber(Entrants entrants) {

@@ -15,24 +15,24 @@ namespace MeleeAutomator.VSMode {
         private VerticalMenuCursor menuCursor;
 
         public VSMenu(MeleeStates states, MenuSelector state) : base(states, state) {
-            menuCursor = new VerticalMenuCursor(controller, 5);
+            menuCursor = new VerticalMenuCursor(mainController, 5);
         }
 
         public async Task<MeleeMenu> meleeMode() {
             await menuCursor.moveTo(1);
-            await controller.press(DolphinButton.A).execute();
+            await mainController.press(DolphinButton.A).execute();
             return states.meleeMenu;
         }
 
         public async Task<OptionsMenu> optionsMenu() {
             await menuCursor.moveTo(4);
-            await controller.press(DolphinButton.A).execute();
+            await mainController.press(DolphinButton.A).execute();
             return states.optionsMenu;
         }
 
         public async Task<TournamentMenu> tournamentMode() {
             await menuCursor.moveTo(2);
-            await controller.press(DolphinButton.A).execute();
+            await mainController.press(DolphinButton.A).execute();
             return states.tournamentMenu;
         }
 
