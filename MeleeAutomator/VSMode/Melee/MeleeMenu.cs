@@ -24,7 +24,7 @@ namespace MeleeAutomator.VSMode.Melee {
                 new MeleePortrait(new MeleeCharacterCursor(states.controllers[0], 1)),
                 new MeleePortrait(new MeleeCharacterCursor(states.controllers[1], 2))
             };
-            stageCursor = new MeleeStageCursor(states.mainController);
+            stageCursor = new MeleeStageCursor(mainController);
         }
 
         public MeleeMenu setPlayerOnPort(MeleePlayer player, int port) {
@@ -45,7 +45,7 @@ namespace MeleeAutomator.VSMode.Melee {
             base.reset();
         }
 
-        public async Task<ActiveDuelMatch> confirm() {
+        public async Task<FinishedDuelMatch> confirm() {
             await Task.WhenAll(
                 confirmPlayer(0),
                 confirmPlayer(1)
@@ -53,7 +53,10 @@ namespace MeleeAutomator.VSMode.Melee {
             await states.mainController.press(DolphinButton.START).wait(1000).execute();
             await stageCursor.select(stage);
             await states.mainController.press(DolphinButton.A).execute();
-            return new ActiveDuelMatch(players[0], players[1], states.dolphinWindowCapturer);
+            ActiveDuelMatch match = new ActiveDuelMatch(players[0], players[1], states.dolphinWindowCapturer);
+            FinishedDuelMatch finishedMatch = await match.finish();
+            await mainController.press(DolphinButton.A).execute();
+            return finishedMatch;
         }
 
         private async Task confirmPlayer(int i) {

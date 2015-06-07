@@ -13,5 +13,9 @@ namespace MeleeAutomator.VSMode.Melee {
             this.character = character;
             this.name = name;
         }
+
+        public override string ToString() {
+            return name + " with " + character;
+        }
     }
 }

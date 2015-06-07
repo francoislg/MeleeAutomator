@@ -52,6 +52,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MatchRessources.resx</DependentUpon>
     </Compile>
+    <Compile Include="VSMode\Melee\FinishedDuelMatch.cs" />
     <Compile Include="VSMode\Melee\MatchImageMatcher.cs" />
     <Compile Include="Characters\CouldNotMatchCharacterException.cs" />
     <Compile Include="CouldNotFindDolphinWindowException.cs" />
