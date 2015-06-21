@@ -8,11 +8,16 @@ using System.Threading.Tasks;
 
 namespace MeleeAutomator.Images {
     public class ImageHelper {
-        public static bool areExactlySame(Bitmap bitmap, Bitmap compared){
+        public static bool areSimilar(Bitmap bitmap, Bitmap compared){
+            int pctError = (int)(0.05f * (bitmap.Size.Width * bitmap.Size.Height));
+            int nbError = 0;
             for (int i = 0; i < bitmap.Size.Width - 1; i++) {
                 for (int j = 0; j < bitmap.Size.Height - 1; j++) {
                     if (bitmap.GetPixel(i, j) != compared.GetPixel(i, j)) {
-                        return false;
+                        nbError++;
+                        if (nbError > pctError) {
+                            return false;
+                        }
                     }
                 }
             }

@@ -29,7 +29,7 @@ namespace MeleeAutomator.Characters {
                 for (int y = 0; y < 5; y++) {
                     Character currentCharacter = allCharacters[x, y];
                     using (Bitmap characterBitmap = ImageHelper.resize(currentCharacter.tournamentBitmap, compared.Size)) {
-                        if (ImageHelper.areExactlySame(characterBitmap, compared)) {
+                        if (ImageHelper.areSimilar(characterBitmap, compared)) {
                             foundCharacter = currentCharacter;
                             found = true;
                             break;

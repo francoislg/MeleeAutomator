@@ -20,12 +20,12 @@ namespace MeleeAutomator.Characters {
         }
 
         public bool isEndOfMatch(Bitmap compared) {
-            return ImageHelper.areExactlySame(endOfMatchBitmap, compared);
+            return ImageHelper.areSimilar(endOfMatchBitmap, compared);
         }
 
         public bool playerWon(Bitmap compared) {
             foreach (Bitmap bitmap in ribbonBitmaps) {
-                if (ImageHelper.areExactlySame(bitmap, compared)) {
+                if (ImageHelper.areSimilar(bitmap, compared)) {
                     return true;
                 }
             }
