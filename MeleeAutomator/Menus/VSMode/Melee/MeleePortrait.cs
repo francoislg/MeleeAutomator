@@ -11,8 +11,10 @@ namespace MeleeAutomator.Menus.VSMode.Melee {
     using Cursors;
     public class MeleePortrait {
         private readonly int NUMBEROFMOVEMENTSTORECALIBRATE = 10;
+        private DolphinAsyncController controller;
         private MeleeCharacterCursor cursor;
         private int countNumberOfMovements = 0;
+        private Character currentCharacter;
         private enum PortraitState {
             HMN, CPU, NA
         };
@@ -20,8 +22,9 @@ namespace MeleeAutomator.Menus.VSMode.Melee {
         private PortraitState currentState;
         private int level = 1;
 
-        public MeleePortrait(MeleeCharacterCursor cursor) {
-            this.cursor = cursor;
+        public MeleePortrait(DolphinAsyncController controller, int player) {
+            this.controller = controller;
+            this.cursor = new MeleeCharacterCursor(controller, player);
             this.currentState = PortraitState.NA;
         }
 
@@ -68,11 +71,18 @@ namespace MeleeAutomator.Menus.VSMode.Melee {
         }
 
         public async Task select(Character character) {
+            currentCharacter = character;
             await cursor.select(character);
             countNumberOfMovements++;
             if (countNumberOfMovements > NUMBEROFMOVEMENTSTORECALIBRATE) {
                 countNumberOfMovements = 0;
                 await cursor.calibrate();
+            }
+        }
+
+        public async Task applyStageModifier() {
+            if (currentCharacter.name == "Shiek") {
+                await controller.hold(DolphinButton.A).forMilliseconds(5000).execute();
             }
         }
 

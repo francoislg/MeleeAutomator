@@ -15,7 +15,8 @@ namespace MeleeAutomator.Characters {
             "Link", "Mario", "Ness", "Pikachu", "IceClimbers", 
             "Zelda", "Yoshi", "Samus", "Peach", "GameAndWatch", 
             "DrMario", "Luigi", "Jigglypuff", "Mewtwo", "Marth",
-            "Ganondorf", "YoungLink", "Falco", "Pichu", "Roy"
+            "Ganondorf", "YoungLink", "Falco", "Pichu", "Roy",
+            "Shiek"
         };
         private readonly Dictionary<String, Point> cssPosition = new Dictionary<string, Point>() {
             {"DrMario", new Point(0,0) }, {"Mario", new Point(1,0) },{"Luigi", new Point(2,0) }, {"Bowser", new Point(3,0) }, {"Peach", new Point(4,0) }, {"Yoshi", new Point(5,0) }, {"DK", new Point(6,0) }, {"CaptainFalcon", new Point(7,0) }, {"Ganondorf", new Point(8,0) }, 

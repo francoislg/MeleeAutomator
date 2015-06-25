@@ -22,8 +22,8 @@ namespace MeleeAutomator.Menus.VSMode.Melee {
         public MeleeMenu(MeleeStates states, VSMenu state)
             : base(states, state) {
             portraits = new MeleePortrait[] {
-                new MeleePortrait(new MeleeCharacterCursor(states.controllers[0], 1)),
-                new MeleePortrait(new MeleeCharacterCursor(states.controllers[1], 2))
+                new MeleePortrait(states.controllers[0], 1),
+                new MeleePortrait(states.controllers[1], 2)
             };
             stageCursor = new MeleeStageCursor(mainController);
         }
@@ -59,6 +59,10 @@ namespace MeleeAutomator.Menus.VSMode.Melee {
             await states.mainController.press(DolphinButton.START).wait(1000).execute();
             await stageCursor.select(stage);
             await states.mainController.press(DolphinButton.A).execute();
+            await Task.WhenAll(
+               stageModifierForPlayer(0),
+               stageModifierForPlayer(1)
+           );
             ActiveDuelMatch match = new ActiveDuelMatch(players[0], players[1], states.dolphinWindowCapturer);
             FinishedDuelMatch finishedMatch = await match.finish();
             await mainController.wait(1000).then().press(DolphinButton.A).then().wait(3000).then().press(DolphinButton.START).execute();
@@ -73,6 +77,12 @@ namespace MeleeAutomator.Menus.VSMode.Melee {
                 await portraits[i].changeToCPU();
                 await portraits[i].changeToLevel(9);
                 await portraits[i].select(players[i].character);
+            }
+        }
+
+        private async Task stageModifierForPlayer(int i) {
+            if (i < numberOfPlayers) {
+                await portraits[i].applyStageModifier();
             }
         }
     }
